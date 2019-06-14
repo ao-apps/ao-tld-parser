@@ -36,13 +36,12 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
- * A *.tld file is parsed entirely on start-up to maximize runtime performance.
- *
- * TODO: This could be its own micro-project.
+ * Models one tag within the *.tld file.
  */
 public class Tag {
 
 	private final Taglib taglib;
+	private final Dates dates;
 	private final List<String> descriptions;
 	private final List<String> displayNames;
 	private final String name;
@@ -64,6 +63,11 @@ public class Tag {
 	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		this.taglib = taglib;
 
+		this.name = XmlUtils.getChildTextContent(tagElem, "name");
+
+		this.dates = Dates.fromComments(tagElem, taglib.getDates());
+		this.dates.checkNotBefore(taglib.getTldPath() + "/" + name, taglib.getTldPath(), taglib.getDates());
+
 		List<String> newDescriptions = new ArrayList<>();
 		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(tagElem, "description")) {
 			newDescriptions.add(descriptionElem.getTextContent());
@@ -76,7 +80,6 @@ public class Tag {
 		}
 		this.displayNames = AoCollections.optimalUnmodifiableList(newDisplayNames);
 
-		this.name = XmlUtils.getChildTextContent(tagElem, "name");
 		this.tagClass = XmlUtils.getChildTextContent(tagElem, "tag-class");
 		this.teiClass = XmlUtils.getChildTextContent(tagElem, "tei-class");
 		this.bodyContent = XmlUtils.getChildTextContent(tagElem, "body-content");
@@ -107,6 +110,10 @@ public class Tag {
 
 	public Taglib getTaglib() {
 		return taglib;
+	}
+
+	public Dates getDates() {
+		return dates;
 	}
 
 	public List<String> getDescriptions() {
@@ -154,7 +161,7 @@ public class Tag {
 	 * If there is more than once description, only the first is used in generating the summary.
 	 * If there are no descriptions, returns {@code null}.
 	 *
-	 * @see  HtmlSnippet#getSummary(java.lang.String)
+	 * @see  HtmlSnippet#getSummary(java.lang.String, java.lang.String)
 	 */
 	public String getDescriptionSummary() {
 		return descriptionSummary;

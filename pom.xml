@@ -64,6 +64,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 								<link>https://aoindustries.com/ao-lang/apidocs/</link>
 								<link>https://aoindustries.com/aocode-public/apidocs/</link>
 								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-3.9/</link>
+								<link>https://www.joda.org/joda-time/apidocs/</link>
 							</links>
 						</configuration>
 					</plugin>
@@ -74,6 +75,10 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Test -->
+			<dependency>
+				<groupId>junit</groupId><artifactId>junit</artifactId><version>4.12</version>
+			</dependency>
 			<!-- Direct -->
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>1.7.1-SNAPSHOT</version>
@@ -87,10 +92,18 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 			<dependency>
 				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>3.9</version>
 			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId><artifactId>joda-time</artifactId><version>2.10.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId><artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<!-- Direct -->
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId>
@@ -103,6 +116,9 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId><artifactId>joda-time</artifactId>
 		</dependency>
 	</dependencies>
 </project>

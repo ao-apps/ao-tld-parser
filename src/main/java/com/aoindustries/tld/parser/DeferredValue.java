@@ -26,7 +26,7 @@ import com.aoindustries.xml.XmlUtils;
 import org.w3c.dom.Element;
 
 /**
- * A *.tld file is parsed entirely on start-up to maximize runtime performance.
+ * Models <a href="https://docs.oracle.com/cd/E19575-01/819-3669/bnahr/index.html">deferred values</a>.
  */
 public class DeferredValue {
 

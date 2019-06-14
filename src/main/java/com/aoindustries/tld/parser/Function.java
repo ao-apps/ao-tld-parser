@@ -34,13 +34,12 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
- * A *.tld file is parsed entirely on start-up to maximize runtime performance.
- *
- * TODO: This could be its own micro-project.
+ * Models one function within the *.tld file.
  */
 public class Function {
 
 	private final Taglib taglib;
+	private final Dates dates;
 	private final List<String> descriptions;
 	private final List<String> displayNames;
 	private final String name;
@@ -58,6 +57,11 @@ public class Function {
 	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		this.taglib = taglib;
 
+		this.name = XmlUtils.getChildTextContent(functionElem, "name");
+
+		this.dates = Dates.fromComments(functionElem, taglib.getDates());
+		this.dates.checkNotBefore(taglib.getTldPath() + "/" + name, taglib.getTldPath(), taglib.getDates());
+
 		List<String> newDescriptions = new ArrayList<>();
 		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(functionElem, "description")) {
 			newDescriptions.add(descriptionElem.getTextContent());
@@ -70,7 +74,6 @@ public class Function {
 		}
 		this.displayNames = AoCollections.optimalUnmodifiableList(newDisplayNames);
 
-		this.name = XmlUtils.getChildTextContent(functionElem, "name");
 		this.functionClass = XmlUtils.getChildTextContent(functionElem, "function-class");
 		this.functionSignature = XmlUtils.getChildTextContent(functionElem, "function-signature");
 		this.example = XmlUtils.getChildTextContent(functionElem, "example");
@@ -86,6 +89,10 @@ public class Function {
 
 	public Taglib getTaglib() {
 		return taglib;
+	}
+
+	public Dates getDates() {
+		return dates;
 	}
 
 	public List<String> getDescriptions() {
@@ -117,7 +124,7 @@ public class Function {
 	 * If there is more than once description, only the first is used in generating the summary.
 	 * If there are no descriptions, returns {@code null}.
 	 *
-	 * @see  HtmlSnippet#getSummary(java.lang.String)
+	 * @see  HtmlSnippet#getSummary(java.lang.String, java.lang.String)
 	 */
 	public String getDescriptionSummary() {
 		return descriptionSummary;

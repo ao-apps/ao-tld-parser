@@ -36,6 +36,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2019-06-12T18:28:39-0500"
+		dateModified="2019-06-13T03:48:17-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-tld-parser:pom.version}" />
@@ -56,9 +57,14 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 						JSP taglib parser pulled out of <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
 						into its own project.
 					</li>
-					<!-- TODO:
-					<li>Added support for published and modified times parsed from comments within the *.tld files.</li>
-					-->
+					<li>
+						Added support for dateCreated, datePublished, dateModified, and dateReviewed parsed from comments within the *.tld files.
+						<p>
+							This allows <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
+							to provide these dates, which are provided to search engines via
+							<ao:a href="https://semanticcms.com/core/sitemap/">SemanticCMS Core Sitemap</ao:a>.
+						</p>
+					</li>
 				</ul>
 			</changelog:release>
 		</c:if>

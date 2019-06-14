@@ -30,9 +30,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Element;
 
 /**
- * A *.tld file is parsed entirely on start-up to maximize runtime performance.
- *
- * TODO: This could be its own micro-project: ao-tld-parser
+ * Models one attribute within a tag within the *.tld file.
  */
 public class Attribute {
 
@@ -123,7 +121,7 @@ public class Attribute {
 	 * If there is more than once description, only the first is used in generating the summary.
 	 * If there are no descriptions, returns {@code null}.
 	 *
-	 * @see  HtmlSnippet#getSummary(java.lang.String)
+	 * @see  HtmlSnippet#getSummary(java.lang.String, java.lang.String)
 	 */
 	public String getDescriptionSummary() {
 		return descriptionSummary;

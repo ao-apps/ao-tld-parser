@@ -32,6 +32,9 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+/**
+ * Extracts summaries from descriptions.
+ */
 public class HtmlSnippet {
 
 	/**
