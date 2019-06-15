@@ -55,6 +55,15 @@ public class Taglib {
 	private final Dates functionsEffectiveDates;
 	private final Dates taglibEffectiveDates;
 
+	/**
+	 * Extracts the components of an XML-parsed *.tld file.
+	 *
+	 * @param summaryClass  The CSS class that marks elements to be included in summaries
+	 * @param tldPath  The path to the taglib, used for error messages only
+	 * @param defaultDates  The optional default dates for when no date-comments found
+	 * @param tldDoc  The document that has already been parsed
+	 * @param apiLinks  The set of API URL prefixes, mapping from package name to base URL (including trailing space)
+	 */
 	public Taglib(
 		String summaryClass,
 		String tldPath,

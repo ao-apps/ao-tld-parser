@@ -45,6 +45,8 @@ public class HtmlSnippet {
 	 * For higher performance, use another mechanism to compute once and use repeatedly.
 	 * This is for convenience, not performance.
 	 * </p>
+	 *
+	 * @param summaryClass  The CSS class that marks elements to be included in summaries
 	 */
 	public static String getSummary(String summaryClass, String htmlSnippet) throws XPathExpressionException {
 		XPathFactory xpathFactory = XPathFactory.newInstance();
