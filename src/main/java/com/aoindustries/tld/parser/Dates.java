@@ -73,19 +73,22 @@ public class Dates {
 	 * Parses dates from within direct child comments of the given element.
 	 *
 	 * @param elem  The element to find direct child comments of
-	 * @param defaultDates  The optional default dates for when comments not found
+	 * @param defaultDates  The optional default dates for when no date-comments found
 	 */
 	public static Dates fromComments(Element elem, Dates defaultDates) {
 		DateTime created   = parseComments(elem, DATE_CREATED_PATTERN,   DATE_CREATED);
 		DateTime published = parseComments(elem, DATE_PUBLISHED_PATTERN, DATE_PUBLISHED);
 		DateTime modified  = parseComments(elem, DATE_MODIFIED_PATTERN,  DATE_MODIFIED);
 		DateTime reviewed  = parseComments(elem, DATE_REVIEWED_PATTERN,  DATE_REVIEWED);
-		// Use defaults as-needed
-		if(defaultDates != null) {
-			if(created   == null) created   = defaultDates.getCreated();
-			if(published == null) published = defaultDates.getPublished();
-			if(modified  == null) modified  = defaultDates.getModified();
-			if(reviewed  == null) reviewed  = defaultDates.getReviewed();
+		// Use defaults when no date-comments found
+		if(
+			defaultDates != null
+			&& created   == null
+			&& published == null
+			&& modified  == null
+			&& reviewed  == null
+		) {
+			return defaultDates;
 		}
 		return valueOf(
 			created,
