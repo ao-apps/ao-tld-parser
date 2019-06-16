@@ -37,6 +37,21 @@ import org.xml.sax.SAXException;
 
 /**
  * Models the *.tld file overall.
+ * <p>
+ * TODO: Warn when using defaultDates?
+ * </p>
+ * <p>
+ * TODO: When a taglib is expected to have all dates specified, disallow default dates and error instead?
+ * </p>
+ * <p>
+ * TODO: Use a Callable to get defaultDates when first needed.  This will avoid overhead when not needed.
+ * </p>
+ * <p>
+ * TODO: Parse all elements and error if dates found in wrong places?
+ * </p>
+ * <p>
+ * TODO: Support rel="nofollow" for generated links, nofollow those going to Oracle?
+ * </p>
  */
 public class Taglib {
 
