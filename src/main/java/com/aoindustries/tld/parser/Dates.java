@@ -22,6 +22,7 @@
  */
 package com.aoindustries.tld.parser;
 
+import com.aoindustries.util.AoArrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.joda.time.DateTime;
@@ -244,10 +245,30 @@ public class Dates {
 		if(d1 == null && d2 == null) return null;
 		if(d1 == null) return d2;
 		if(d2 == null) return d1;
+		DateTime created1   = d1.getCreated();
+		DateTime created2   = d2.getCreated();
+		DateTime published1 = d1.getPublished();
+		DateTime published2 = d2.getPublished();
+		DateTime modified1  = d1.getModified();
+		DateTime modified2  = d2.getModified();
+		if(modified1 != null || modified2 != null) {
+			if(modified1 == null) {
+				modified1 = AoArrays.maxNonNull(
+					created1,
+					published1
+				);
+			}
+			if(modified2 == null) {
+				modified2 = AoArrays.maxNonNull(
+					created2,
+					published2
+				);
+			}
+		}
 		return valueOf(
-			older(d1.created,   d2.created),
-			older(d1.published, d2.published),
-			newer(d1.modified,  d2.modified),
+			older(created1,   created2),
+			older(published1, published2),
+			newer(modified1,  modified2),
 			older(d1.reviewed,  d2.reviewed)
 		);
 	}
