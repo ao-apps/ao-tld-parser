@@ -36,7 +36,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2019-06-12T18:28:39-0500"
-		dateModified="2019-06-13T03:48:17-0500"
+		dateModified="2019-06-20T15:22:38-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-tld-parser:pom.version}" />
@@ -51,22 +51,31 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			>
-				<ul>
-					<li>
-						JSP taglib parser pulled out of <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
-						into its own project.
-					</li>
-					<li>
-						Added support for dateCreated, datePublished, dateModified, and dateReviewed parsed from comments within the *.tld files.
-						<p>
-							This allows <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
-							to provide these dates, which are provided to search engines via
-							<ao:a href="https://semanticcms.com/core/sitemap/">SemanticCMS Core Sitemap</ao:a>.
-						</p>
-					</li>
-				</ul>
-			</changelog:release>
+			/>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="1.0.0"
+			datePublished="2019-06-20T15:22:38-0500"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
+		>
+			<ul>
+				<li>
+					JSP taglib parser pulled out of <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
+					into its own project.
+				</li>
+				<li>
+					Added support for dateCreated, datePublished, dateModified, and dateReviewed parsed from comments within the *.tld files.
+					<p>
+						This allows <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
+						to provide these dates, which are provided to search engines via
+						<ao:a href="https://semanticcms.com/core/sitemap/">SemanticCMS Core Sitemap</ao:a>.
+					</p>
+				</li>
+			</ul>
+		</changelog:release>
 	</core:page>
 </jsp:root>
