@@ -29,7 +29,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		<relativePath>../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>ao-tld-parser</artifactId><version>1.0.0-POST-SNAPSHOT</version>
+	<groupId>com.aoindustries</groupId><artifactId>ao-tld-parser</artifactId><version>1.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -62,7 +62,6 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 								<!-- Direct -->
 								<link>https://aoindustries.com/ao-encoding/apidocs/</link>
 								<link>https://aoindustries.com/ao-lang/apidocs/</link>
-								<link>https://aoindustries.com/aocode-public/apidocs/</link>
 								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-3.9/</link>
 								<link>https://www.joda.org/joda-time/apidocs/</link>
 							</links>
@@ -87,9 +86,6 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 				<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>3.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>aocode-public</artifactId><version>3.1.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
 				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>3.9</version>
 			</dependency>
 			<dependency>
@@ -110,9 +106,6 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>aocode-public</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
