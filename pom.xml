@@ -33,10 +33,6 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 	<packaging>bundle</packaging>
 
 	<properties>
-		<javaVersion>1.8</javaVersion>
-		<compiler.bootclasspath>${bootclasspath.jdk8}</compiler.bootclasspath>
-		<javac.bootclasspath>${bootclasspath.jdk8}</javac.bootclasspath>
-		<javac.link.javaApi>${javac.link.javaApi.jdk8}</javac.link.javaApi>
 		<description.html><![CDATA[Parses <a target="_top" rel="nofollow" href="https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.html">JSP tag library</a> *.tld files.]]></description.html>
 	</properties>
 
@@ -62,7 +58,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
 						<configuration>
 							<links>
-								<link>${javac.link.javaApi}</link>
+								<link>${javadoc.link.javase}</link>
 								<!-- Direct -->
 								<link>https://aoindustries.com/ao-encoding/apidocs/</link>
 								<link>https://aoindustries.com/ao-lang/apidocs/</link>
