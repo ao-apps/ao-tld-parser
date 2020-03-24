@@ -27,7 +27,7 @@ Parses [JSP tag library](https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.htm
 * [Project Home](https://aoindustries.com/ao-tld-parser/)
 * [Changelog](https://aoindustries.com/ao-tld-parser/changelog)
 * [API Docs](https://aoindustries.com/ao-tld-parser/apidocs/)
-* [Maven Central Repository](https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.aoindustries%22%20AND%20a:%22ao-tld-parser%22)
+* [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/ao-tld-parser)
 * [GitHub](https://github.com/aoindustries/ao-tld-parser)
 
 ## Related Projects
