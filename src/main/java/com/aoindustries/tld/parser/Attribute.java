@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,7 +22,7 @@
  */
 package com.aoindustries.tld.parser;
 
-import com.aoindustries.util.AoCollections;
+import com.aoindustries.collections.AoCollections;
 import com.aoindustries.xml.XmlUtils;
 import java.util.ArrayList;
 import java.util.List;
