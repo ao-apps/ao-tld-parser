@@ -34,6 +34,8 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 
 	<properties>
 		<description.html><![CDATA[Parses <a target="_top" rel="nofollow" href="https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.html">JSP tag library</a> *.tld files.]]></description.html>
+		<!-- Dependencies -->
+		<org.apache.commons:commons-lang3:version>3.9</org.apache.commons:commons-lang3:version>
 	</properties>
 
 	<name>AO TLD Parser</name>
@@ -63,7 +65,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 								<link>https://aoindustries.com/ao-collections/apidocs/</link>
 								<link>https://aoindustries.com/ao-encoding/apidocs/</link>
 								<link>https://aoindustries.com/ao-lang/apidocs/</link>
-								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-3.9/</link>
+								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-${org.apache.commons:commons-lang3:version}/</link>
 								<link>https://www.joda.org/joda-time/apidocs/</link>
 							</links>
 						</configuration>
@@ -90,7 +92,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 				<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>4.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>3.9</version>
+				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${org.apache.commons:commons-lang3:version}</version>
 			</dependency>
 			<dependency>
 				<groupId>joda-time</groupId><artifactId>joda-time</artifactId><version>2.10.5</version>
