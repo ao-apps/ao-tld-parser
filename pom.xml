@@ -35,7 +35,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 	<properties>
 		<description.html><![CDATA[Parses <a target="_top" rel="nofollow" href="https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.html">JSP tag library</a> *.tld files.]]></description.html>
 		<!-- Dependencies -->
-		<org.apache.commons.commons-lang3.version>3.9</org.apache.commons.commons-lang3.version>
+		<org.apache.commons.commons-lang3.version>3.10</org.apache.commons.commons-lang3.version>
 	</properties>
 
 	<name>AO TLD Parser</name>
