@@ -44,7 +44,6 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 	<inceptionYear>2019</inceptionYear>
 
 	<scm>
-		<!-- Can't inherit due to multi-module -->
 		<connection>scm:git:git://github.com/aoindustries/ao-tld-parser.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/ao-tld-parser.git</developerConnection>
 		<url>https://github.com/aoindustries/ao-tld-parser</url>
