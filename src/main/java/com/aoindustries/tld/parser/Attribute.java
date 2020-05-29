@@ -31,6 +31,9 @@ import org.w3c.dom.Element;
 
 /**
  * Models one attribute within a tag within the *.tld file.
+ * <p>
+ * See <a href="https://docs.oracle.com/cd/E19879-01/819-3669/bnani/index.html">Declaring Tag Attributes for Tag Handlers (The Java EE 5 Tutorial)</a>.
+ * </p>
  */
 public class Attribute {
 
