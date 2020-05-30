@@ -37,7 +37,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2019-06-12T18:28:39-0500"
-		dateModified="2020-03-27T15:56:40-05:00"
+		dateModified="2020-05-29T22:59:03-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-tld-parser:pom.version}" />
@@ -52,7 +52,14 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>
+						Removed unused parameter <code>apiLinks</code> from both
+						<code>Function</code> and <code>Taglib</code>.
+					</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release

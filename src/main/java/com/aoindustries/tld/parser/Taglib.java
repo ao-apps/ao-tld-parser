@@ -77,14 +77,12 @@ public class Taglib {
 	 * @param tldPath  The path to the taglib, used for error messages only
 	 * @param defaultDates  The optional default dates for when no date-comments found
 	 * @param tldDoc  The document that has already been parsed
-	 * @param apiLinks  The set of API URL prefixes, mapping from package name to base URL (including trailing space)
 	 */
 	public Taglib(
 		String summaryClass,
 		String tldPath,
 		Dates defaultDates,
-		Document tldDoc,
-		Map<String,String> apiLinks
+		Document tldDoc
 	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		this.tldPath = tldPath;
 
@@ -123,7 +121,7 @@ public class Taglib {
 		Map<String,Function> newFunctions = new LinkedHashMap<>();
 		Dates newFunctionsEffectiveDates = null;
 		for(Element functionElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "function")) {
-			Function newFunction = new Function(summaryClass, this, functionElem, apiLinks);
+			Function newFunction = new Function(summaryClass, this, functionElem);
 			String functionName = newFunction.getName();
 			if(newFunctions.put(functionName, newFunction) != null) throw new IllegalArgumentException("Duplicate function name: " + functionName);
 			newFunctionsEffectiveDates = Dates.merge(newFunctionsEffectiveDates, newFunction.getDates());
@@ -135,6 +133,20 @@ public class Taglib {
 			Dates.merge(this.dates, this.tagsEffectiveDates),
 			this.functionsEffectiveDates
 		);
+	}
+
+	/**
+	 * @deprecated  {@code apiLinks} is unused, please use {@link #Taglib(java.lang.String, java.lang.String, com.aoindustries.tld.parser.Dates, org.w3c.dom.Document)} instead.
+	 */
+	@Deprecated
+	public Taglib(
+		String summaryClass,
+		String tldPath,
+		Dates defaultDates,
+		Document tldDoc,
+		Map<String,String> apiLinks
+	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+		this(summaryClass, tldPath, defaultDates, tldDoc);
 	}
 
 	public String getTldPath() {

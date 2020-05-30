@@ -52,8 +52,7 @@ public class Function {
 	public Function(
 		String summaryClass,
 		Taglib taglib,
-		Element functionElem,
-		Map<String,String> apiLinks
+		Element functionElem
 	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		this.taglib = taglib;
 
@@ -85,6 +84,19 @@ public class Function {
 			wrapped.initCause(e);
 			throw wrapped;
 		}
+	}
+
+	/**
+	 * @deprecated  {@code apiLinks} is unused, please use {@link #Function(java.lang.String, com.aoindustries.tld.parser.Taglib, org.w3c.dom.Element)} instead.
+	 */
+	@Deprecated
+	public Function(
+		String summaryClass,
+		Taglib taglib,
+		Element functionElem,
+		Map<String,String> apiLinks
+	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+		this(summaryClass, taglib, functionElem);
 	}
 
 	public Taglib getTaglib() {
