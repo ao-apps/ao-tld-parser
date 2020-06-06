@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Element;
@@ -35,6 +36,11 @@ import org.xml.sax.SAXException;
 
 /**
  * Models one function within the *.tld file.
+ * <p>
+ * TLD files may provide generics within special comments inside the XML, where the value must match
+ * <code>function-signature</code>, but with the addition of {@code <…>} segments.
+ * </p>
+ * <pre>&lt;!-- functionSignature = "…" --&gt;</pre>
  */
 public class Function {
 
@@ -48,6 +54,8 @@ public class Function {
 	private final String example;
 
 	private final String descriptionSummary;
+
+	private final static Pattern FUNCTION_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "functionSignature" + XmlHelper.PATTERN_POST);
 
 	public Function(
 		String summaryClass,
@@ -74,7 +82,7 @@ public class Function {
 		this.displayNames = AoCollections.optimalUnmodifiableList(newDisplayNames);
 
 		this.functionClass = XmlUtils.getChildTextContent(functionElem, "function-class");
-		this.functionSignature = XmlUtils.getChildTextContent(functionElem, "function-signature");
+		this.functionSignature = XmlHelper.getChildWithGenerics(functionElem, "function-signature", FUNCTION_SIGNATURE_PATTERN, "functionSignature");
 		this.example = XmlUtils.getChildTextContent(functionElem, "example");
 
 		try {

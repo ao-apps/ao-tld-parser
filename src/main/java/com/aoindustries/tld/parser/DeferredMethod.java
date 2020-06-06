@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,23 +22,30 @@
  */
 package com.aoindustries.tld.parser;
 
-import com.aoindustries.xml.XmlUtils;
+import java.util.regex.Pattern;
 import org.w3c.dom.Element;
 
 /**
  * Models <a href="https://docs.oracle.com/cd/E19575-01/819-3669/bnahr/index.html">deferred methods</a>.
+ * <p>
+ * TLD files may provide generics within special comments inside the XML, where the value must match
+ * <code>method-signature</code>, but with the addition of {@code <…>} segments.
+ * </p>
+ * <pre>&lt;!-- methodSignature = "…" --&gt;</pre>
  */
 public class DeferredMethod {
 
 	private final Attribute attribute;
 	private final String methodSignature;
 
+	private final static Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "methodSignature" + XmlHelper.PATTERN_POST);
+
 	public DeferredMethod(
 		Attribute attribute,
 		Element deferredMethodElem
 	) {
 		this.attribute = attribute;
-		this.methodSignature = XmlUtils.getChildTextContent(deferredMethodElem, "method-signature");
+		this.methodSignature = XmlHelper.getChildWithGenerics(deferredMethodElem, "method-signature", METHOD_SIGNATURE_PATTERN, "methodSignature");
 	}
 
 	public Attribute getAttribute() {

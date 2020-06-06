@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,23 +22,30 @@
  */
 package com.aoindustries.tld.parser;
 
-import com.aoindustries.xml.XmlUtils;
+import java.util.regex.Pattern;
 import org.w3c.dom.Element;
 
 /**
  * Models <a href="https://docs.oracle.com/cd/E19575-01/819-3669/bnahr/index.html">deferred values</a>.
+ * <p>
+ * TLD files may provide generics within special comments inside the XML, where the value must match
+ * <code>type</code>, but with the addition of {@code <…>} segments.
+ * </p>
+ * <pre>&lt;!-- type = "…" --&gt;</pre>
  */
 public class DeferredValue {
 
 	private final Attribute attribute;
 	private final String type;
 
+	private final static Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
+
 	public DeferredValue(
 		Attribute attribute,
 		Element deferredValueElem
 	) {
 		this.attribute = attribute;
-		this.type = XmlUtils.getChildTextContent(deferredValueElem, "type");
+		this.type = XmlHelper.getChildWithGenerics(deferredValueElem, "type", TYPE_PATTERN, "type");
 	}
 
 	public Attribute getAttribute() {

@@ -23,13 +23,9 @@
 package com.aoindustries.tld.parser;
 
 import com.aoindustries.collections.AoArrays;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.joda.time.DateTime;
-import org.w3c.dom.Comment;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * TLD files may provide dates within special comments inside the XML.
@@ -46,9 +42,6 @@ public class Dates {
 	private static final String DATE_PUBLISHED = "datePublished";
 	private static final String DATE_MODIFIED  = "dateModified";
 	private static final String DATE_REVIEWED  = "dateReviewed";
-
-	private static final String PATTERN_PRE  = "^\\s*";
-	private static final String PATTERN_POST = "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)')\\s*$";
 
 	/**
 	 * A constant for a set of unknown dates.
@@ -99,42 +92,17 @@ public class Dates {
 		);
 	}
 
-	final static Pattern DATE_CREATED_PATTERN   = Pattern.compile(PATTERN_PRE + DATE_CREATED   + PATTERN_POST);
-	final static Pattern DATE_PUBLISHED_PATTERN = Pattern.compile(PATTERN_PRE + DATE_PUBLISHED + PATTERN_POST);
-	final static Pattern DATE_MODIFIED_PATTERN  = Pattern.compile(PATTERN_PRE + DATE_MODIFIED  + PATTERN_POST);
-	final static Pattern DATE_REVIEWED_PATTERN  = Pattern.compile(PATTERN_PRE + DATE_REVIEWED  + PATTERN_POST);
+	final static Pattern DATE_CREATED_PATTERN   = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_CREATED   + XmlHelper.PATTERN_POST);
+	final static Pattern DATE_PUBLISHED_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_PUBLISHED + XmlHelper.PATTERN_POST);
+	final static Pattern DATE_MODIFIED_PATTERN  = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_MODIFIED  + XmlHelper.PATTERN_POST);
+	final static Pattern DATE_REVIEWED_PATTERN  = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_REVIEWED  + XmlHelper.PATTERN_POST);
 
 	/**
 	 * Parse dates from special comments directly within a given {@link Element}.
 	 */
-	private static DateTime parseComments(Element elem, Pattern pattern, String field) {
-		NodeList children = elem.getChildNodes();
-		DateTime date = null;
-		for(int i = 0, len = children.getLength(); i < len; i++) {
-			Node child = children.item(i);
-			if(child instanceof Comment) {
-				Comment comment = (Comment)child;
-				Matcher matcher = pattern.matcher(comment.getData());
-				while(matcher.find()) {
-					String doubleQuoted = matcher.group(1);
-					String singleQuoted = matcher.group(2);
-					String value;
-					if(doubleQuoted != null) {
-						if(singleQuoted != null) throw new IllegalArgumentException(field + ": Found both in double quotes (\") and single quotes ('): " + matcher.group());
-						value = doubleQuoted;
-					} else {
-						assert singleQuoted != null : "At least one of the two capturing groups must have matched";
-						value = singleQuoted;
-					}
-					DateTime newDate = new DateTime(value);
-					if(date != null) {
-						throw new IllegalArgumentException(field + ": More than one value found: \"" + date + "\" and \"" + newDate + "'");
-					}
-					date = newDate;
-				}
-			}
-		}
-		return date;
+	private static DateTime parseComments(Element elem, Pattern pattern, String varName) {
+		String value = XmlHelper.getVariable(elem, pattern, varName);
+		return (value == null) ? null : new DateTime(value);
 	}
 
 	private final DateTime created;

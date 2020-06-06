@@ -26,6 +26,7 @@ import com.aoindustries.collections.AoCollections;
 import com.aoindustries.xml.XmlUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Element;
 
@@ -34,6 +35,11 @@ import org.w3c.dom.Element;
  * <p>
  * See <a href="https://docs.oracle.com/cd/E19879-01/819-3669/bnani/index.html">Declaring Tag Attributes for Tag Handlers (The Java EE 5 Tutorial)</a>.
  * </p>
+ * <p>
+ * TLD files may provide generics within special comments inside the XML, where the value must match
+ * <code>type</code>, but with the addition of {@code <…>} segments.
+ * </p>
+ * <pre>&lt;!-- type = "…" --&gt;</pre>
  */
 public class Attribute {
 
@@ -48,6 +54,8 @@ public class Attribute {
 	private final DeferredValue deferredValue;
 
 	private final String descriptionSummary;
+
+	private final static Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
 
 	public Attribute(
 		String summaryClass,
@@ -66,7 +74,7 @@ public class Attribute {
 		this.required = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "required"));
 		this.rtexprvalue = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "rtexprvalue"));
 		this.fragment = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "fragment"));
-		this.type = XmlUtils.getChildTextContent(attributeElem, "type");
+		this.type = XmlHelper.getChildWithGenerics(attributeElem, "type", TYPE_PATTERN, "type");
 
 		Element deferredMethodElem = XmlUtils.getChildElementByTagName(attributeElem, "deferred-method");
 		this.deferredMethod = deferredMethodElem == null ? null : new DeferredMethod(this, deferredMethodElem);
