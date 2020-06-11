@@ -49,9 +49,6 @@ import org.xml.sax.SAXException;
  * <p>
  * TODO: Parse all elements and error if dates found in wrong places?
  * </p>
- * <p>
- * TODO: Support rel="nofollow" for generated links, nofollow those going to Oracle?
- * </p>
  */
 public class Taglib {
 
