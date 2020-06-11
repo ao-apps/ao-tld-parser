@@ -37,7 +37,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2019-06-12T18:28:39-0500"
-		dateModified="2020-06-06T06:02:15-05:00"
+		dateModified="2020-06-11T03:21:57-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-tld-parser:pom.version}" />
@@ -52,21 +52,30 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			>
-				<ul>
-					<li>
-						Removed unused parameter <code>apiLinks</code> from both
-						<code>Function</code> and <code>Taglib</code>.
-					</li>
-					<li>
-						Now supporting the documentation of generics for signatures and types.
-						As this is not part of the spec, the generics are optionally given in
-						a comment next to the signature or type element, similar
-						to how dates are defined (such as <code>dateCreated</code>).
-					</li>
-				</ul>
-			</changelog:release>
+			/>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="1.1.0"
+			datePublished="2020-06-11T03:21:57-05:00"
+			groupId="@{project.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{project.scm.url}"
+		>
+			<ul>
+				<li>
+					Removed unused parameter <code>apiLinks</code> from both
+					<code>Function</code> and <code>Taglib</code>.
+				</li>
+				<li>
+					Now supporting the documentation of generics for signatures and types.
+					As this is not part of the spec, the generics are optionally given in
+					a comment next to the signature or type element, similar
+					to how dates are defined (such as <code>dateCreated</code>).
+				</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
