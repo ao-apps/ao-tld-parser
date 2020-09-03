@@ -95,6 +95,7 @@ public class Attribute {
 		return tag;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<String> getDescriptions() {
 		return descriptions;
 	}

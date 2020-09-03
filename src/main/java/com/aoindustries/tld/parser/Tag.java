@@ -116,10 +116,12 @@ public class Tag {
 		return dates;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<String> getDescriptions() {
 		return descriptions;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<String> getDisplayNames() {
 		return displayNames;
 	}
@@ -140,10 +142,12 @@ public class Tag {
 		return bodyContent;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public Map<String,Attribute> getAttribute() {
 		return attribute;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<Attribute> getAttributes() {
 		return attributes;
 	}

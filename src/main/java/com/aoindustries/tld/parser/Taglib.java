@@ -154,10 +154,12 @@ public class Taglib {
 		return dates;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<String> getDescriptions() {
 		return descriptions;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<String> getDisplayNames() {
 		return displayNames;
 	}
@@ -174,10 +176,12 @@ public class Taglib {
 		return uri;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public Map<String,Tag> getTag() {
 		return tag;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -191,10 +195,12 @@ public class Taglib {
 		return tagsEffectiveDates;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public Map<String,Function> getFunction() {
 		return function;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<Function> getFunctions() {
 		return functions;
 	}

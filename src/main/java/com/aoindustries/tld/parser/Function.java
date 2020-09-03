@@ -115,10 +115,12 @@ public class Function {
 		return dates;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<String> getDescriptions() {
 		return descriptions;
 	}
 
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
 	public List<String> getDisplayNames() {
 		return displayNames;
 	}
