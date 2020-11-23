@@ -138,6 +138,63 @@ class XmlHelper {
 	 */
 	static Boolean parseAllowRobots(Element elem) {
 		String allowRobots = getVariable(elem, ALLOW_ROBOTS_PATTERN, ALLOW_ROBOTS);
+// Tried to get value of entity to allow them to be selected from within the comments.
+// Unfortunately, entities are not parsed inside comments, and can't seem to get the entity value to perform the substitution ourselves.
+//		if(allowRobots != null) {
+//			allowRobots = allowRobots.trim();
+//			// Check for special entity inside comment
+//			int len = allowRobots.length();
+//			if(
+//				len >= 3
+//				&& allowRobots.charAt(0) == '&'
+//				&& allowRobots.charAt(len - 1) == ';'
+//			) {
+//				Document document = elem.getOwnerDocument();
+//				if(document != null) {
+//					DocumentType doctype = document.getDoctype();
+//					if(doctype != null) {
+//						NamedNodeMap entities = doctype.getEntities();
+//						if(entities != null) {
+//							// TODO: String entityName = allowRobots; ?
+//							String entityName = allowRobots.substring(1, len - 1);
+//							Node node = entities.getNamedItem(entityName);
+//							if(node != null) {
+//								if(node instanceof Entity) {
+//									Entity entity = (Entity)node;
+//									if(logger.isLoggable(Level.FINER)) {
+//										logger.fine(
+//											"entity.nodeName = " + entity.getNodeName() + "\n"
+//											+ "entity.publicId = " + entity.getPublicId() + "\n"
+//											+ "entity.systemId = " + entity.getSystemId() + "\n"
+//											+ "entity.textContent = " + entity.getTextContent()
+//										);
+//									}
+//									String value = entity.getNodeValue();
+//									if(value != null) {
+//										if(logger.isLoggable(Level.FINE)) {
+//											logger.fine("Entity \"" + entityName + "\" has value \"" + value + "\" for element: " + elem);
+//										}
+//										allowRobots = value;
+//									} else if(logger.isLoggable(Level.WARNING)) {
+//										logger.warning("Entity \"" + entityName + "\" has no value for element: " + elem);
+//									}
+//								} else if(logger.isLoggable(Level.WARNING)) {
+//									logger.warning("Entity \"" + entityName + "\" is of unexpected type \"" + node.getClass().getName() + "\" for element: " + elem);
+//								}
+//							} else if(logger.isLoggable(Level.WARNING)) {
+//								logger.warning("Entity \"" + entityName + "\" not found for element: " + elem);
+//							}
+//						} else if(logger.isLoggable(Level.WARNING)) {
+//							logger.warning("No entities for element: " + elem);
+//						}
+//					} else if(logger.isLoggable(Level.WARNING)) {
+//						logger.warning("No doctype for element: " + elem);
+//					}
+//				} else if(logger.isLoggable(Level.WARNING)) {
+//					logger.warning("No document on element: " + elem);
+//				}
+//			}
+//		}
 		if(
 			allowRobots == null
 			|| (allowRobots = allowRobots.trim()).isEmpty()
