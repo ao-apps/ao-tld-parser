@@ -46,6 +46,7 @@ public class Function {
 
 	private final Taglib taglib;
 	private final Dates dates;
+	private final Boolean allowRobots;
 	private final List<String> descriptions;
 	private final List<String> displayNames;
 	private final String name;
@@ -68,6 +69,8 @@ public class Function {
 
 		this.dates = Dates.fromComments(functionElem, taglib.getDates());
 		this.dates.checkNotBefore(taglib.getTldPath() + "/" + name, taglib.getTldPath(), taglib.getDates());
+
+		this.allowRobots = XmlHelper.parseAllowRobots(functionElem);
 
 		List<String> newDescriptions = new ArrayList<>();
 		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(functionElem, "description")) {
@@ -113,6 +116,10 @@ public class Function {
 
 	public Dates getDates() {
 		return dates;
+	}
+
+	public Boolean getAllowRobots() {
+		return allowRobots;
 	}
 
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable

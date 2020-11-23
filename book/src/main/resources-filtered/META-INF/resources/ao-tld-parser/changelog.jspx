@@ -37,7 +37,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2019-06-12T18:28:39-0500"
-		dateModified="2020-06-11T03:21:57-05:00"
+		dateModified="2020-11-23T02:15:57-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-tld-parser:pom.version}" />
@@ -52,7 +52,11 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>Added support for allowRobots parsed from comments within the *.tld files.</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release

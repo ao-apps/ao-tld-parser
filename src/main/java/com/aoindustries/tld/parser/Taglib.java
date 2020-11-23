@@ -54,6 +54,7 @@ public class Taglib {
 
 	private final String tldPath;
 	private final Dates dates;
+	private final Boolean allowRobots;
 	private final List<String> descriptions;
 	private final List<String> displayNames;
 	private final String tlibVersion;
@@ -86,6 +87,8 @@ public class Taglib {
 		Element taglibElem = tldDoc.getDocumentElement();
 
 		this.dates = Dates.fromComments(taglibElem, defaultDates);
+
+		this.allowRobots = XmlHelper.parseAllowRobots(taglibElem);
 
 		List<String> newDescriptions = new ArrayList<>();
 		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "description")) {
@@ -152,6 +155,10 @@ public class Taglib {
 
 	public Dates getDates() {
 		return dates;
+	}
+
+	public Boolean getAllowRobots() {
+		return allowRobots;
 	}
 
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable

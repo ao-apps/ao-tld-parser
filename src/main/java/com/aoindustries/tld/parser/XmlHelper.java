@@ -129,4 +129,28 @@ class XmlHelper {
 			}
 		}
 	}
+
+	private static final String ALLOW_ROBOTS = "allowRobots";
+	private static final Pattern ALLOW_ROBOTS_PATTERN = Pattern.compile(PATTERN_PRE + ALLOW_ROBOTS + PATTERN_POST);
+
+	/**
+	 * Parse allowRobots from special comments directly within a given {@link Element}.
+	 */
+	static Boolean parseAllowRobots(Element elem) {
+		String allowRobots = getVariable(elem, ALLOW_ROBOTS_PATTERN, ALLOW_ROBOTS);
+		if(
+			allowRobots == null
+			|| (allowRobots = allowRobots.trim()).isEmpty()
+			|| "auto".equalsIgnoreCase(allowRobots)
+		) {
+			return null;
+		} else if("true".equalsIgnoreCase(allowRobots)) {
+			return Boolean.TRUE;
+		} else if("false".equalsIgnoreCase(allowRobots)) {
+			return Boolean.FALSE;
+		} else {
+			// Matches semanticcms-core-taglib:PageTag.java
+			throw new IllegalArgumentException("Unexpected value for allowRobots, expect one of \"auto\", \"true\", or \"false\": " + allowRobots);
+		}
+	}
 }
