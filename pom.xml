@@ -35,7 +35,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 	<properties>
 		<description.html><![CDATA[Parses <a target="${javadoc.target}" rel="nofollow" href="https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.html">JSP tag library</a> *.tld files.]]></description.html>
 		<!-- Dependencies -->
-		<commons-lang3.version>3.11</commons-lang3.version>
+		<commons-lang3.version>3.12.0</commons-lang3.version>
 	</properties>
 
 	<name>AO TLD Parser</name>
@@ -136,7 +136,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-lang</location>
 								</offlineLink>
 								<offlineLink>
-									<url>https://commons.apache.org/proper/commons-lang/javadocs/api-${commons-lang3.version}/</url>
+									<url>https://javadoc.io/doc/org.apache.commons/commons-lang3/${commons-lang3.version}/</url>
 									<location>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</location>
 								</offlineLink>
 								<offlineLink>
