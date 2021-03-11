@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -49,7 +49,7 @@ public class Tag {
 	private final String tagClass;
 	private final String teiClass;
 	private final String bodyContent;
-	private final Map<String,Attribute> attribute;
+	private final Map<String, Attribute> attribute;
 	private final List<Attribute> attributes;
 	private final boolean dynamicAttributes;
 	// TODO: Variables
@@ -87,7 +87,7 @@ public class Tag {
 		this.teiClass = XmlUtils.getChildTextContent(tagElem, "tei-class");
 		this.bodyContent = XmlUtils.getChildTextContent(tagElem, "body-content");
 
-		Map<String,Attribute> newAttributes = new LinkedHashMap<>();
+		Map<String, Attribute> newAttributes = new LinkedHashMap<>();
 		for(Element attributeElem : XmlUtils.iterableChildElementsByTagName(tagElem, "attribute")) {
 			Attribute newAttribute = new Attribute(summaryClass, this, attributeElem);
 			String attributeName = newAttribute.getName();
@@ -150,7 +150,7 @@ public class Tag {
 	}
 
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public Map<String,Attribute> getAttribute() {
+	public Map<String, Attribute> getAttribute() {
 		return attribute;
 	}
 

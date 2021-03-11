@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -60,10 +60,10 @@ public class Taglib {
 	private final String tlibVersion;
 	private final String shortName;
 	private final String uri;
-	private final Map<String,Tag> tag;
+	private final Map<String, Tag> tag;
 	private final List<Tag> tags;
 	private final Dates tagsEffectiveDates;
-	private final Map<String,Function> function;
+	private final Map<String, Function> function;
 	private final List<Function> functions;
 	private final Dates functionsEffectiveDates;
 	private final Dates taglibEffectiveDates;
@@ -106,7 +106,7 @@ public class Taglib {
 		this.shortName = XmlUtils.getChildTextContent(taglibElem, "short-name");
 		this.uri = XmlUtils.getChildTextContent(taglibElem, "uri");
 
-		Map<String,Tag> newTags = new LinkedHashMap<>();
+		Map<String, Tag> newTags = new LinkedHashMap<>();
 		Dates newTagsEffectiveDates = null;
 		for(Element tagElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "tag")) {
 			Tag newTag = new Tag(summaryClass, this, tagElem);
@@ -118,7 +118,7 @@ public class Taglib {
 		this.tags = AoCollections.optimalUnmodifiableList(new ArrayList<>(newTags.values()));
 		this.tagsEffectiveDates = newTagsEffectiveDates;
 
-		Map<String,Function> newFunctions = new LinkedHashMap<>();
+		Map<String, Function> newFunctions = new LinkedHashMap<>();
 		Dates newFunctionsEffectiveDates = null;
 		for(Element functionElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "function")) {
 			Function newFunction = new Function(summaryClass, this, functionElem);
@@ -144,7 +144,7 @@ public class Taglib {
 		String tldPath,
 		Dates defaultDates,
 		Document tldDoc,
-		Map<String,String> apiLinks
+		Map<String, String> apiLinks
 	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		this(summaryClass, tldPath, defaultDates, tldDoc);
 	}
@@ -184,7 +184,7 @@ public class Taglib {
 	}
 
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public Map<String,Tag> getTag() {
+	public Map<String, Tag> getTag() {
 		return tag;
 	}
 
@@ -203,7 +203,7 @@ public class Taglib {
 	}
 
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public Map<String,Function> getFunction() {
+	public Map<String, Function> getFunction() {
 		return function;
 	}
 

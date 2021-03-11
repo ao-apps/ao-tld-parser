@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -105,7 +105,7 @@ public class Function {
 		String summaryClass,
 		Taglib taglib,
 		Element functionElem,
-		Map<String,String> apiLinks
+		Map<String, String> apiLinks
 	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		this(summaryClass, taglib, functionElem);
 	}
