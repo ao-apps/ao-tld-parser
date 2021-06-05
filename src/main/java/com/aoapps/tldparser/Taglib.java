@@ -20,10 +20,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.tld.parser;
+package com.aoapps.tldparser;
 
-import com.aoindustries.collections.AoCollections;
-import com.aoindustries.xml.XmlUtils;
+import com.aoapps.collections.AoCollections;
+import com.aoapps.lang.xml.XmlUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -136,7 +136,7 @@ public class Taglib {
 	}
 
 	/**
-	 * @deprecated  {@code apiLinks} is unused, please use {@link #Taglib(java.lang.String, java.lang.String, com.aoindustries.tld.parser.Dates, org.w3c.dom.Document)} instead.
+	 * @deprecated  {@code apiLinks} is unused, please use {@link #Taglib(java.lang.String, java.lang.String, com.aoapps.tldparser.Dates, org.w3c.dom.Document)} instead.
 	 */
 	@Deprecated
 	public Taglib(

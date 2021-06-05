@@ -20,25 +20,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.tld.parser;
+package com.aoapps.tldparser;
 
-import com.aoindustries.collections.AoCollections;
-import com.aoindustries.xml.XmlUtils;
+import com.aoapps.collections.AoCollections;
+import com.aoapps.lang.xml.XmlUtils;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import org.apache.commons.lang3.NotImplementedException;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
- * Models one tag within the *.tld file.
+ * Models one function within the *.tld file.
+ * <p>
+ * TLD files may provide generics within special comments inside the XML, where the value must match
+ * <code>function-signature</code>, but with the addition of {@code <…>} segments.
+ * </p>
+ * <pre>&lt;!-- functionSignature = "…" --&gt;</pre>
  */
-public class Tag {
+public class Function {
 
 	private final Taglib taglib;
 	private final Dates dates;
@@ -46,61 +50,43 @@ public class Tag {
 	private final List<String> descriptions;
 	private final List<String> displayNames;
 	private final String name;
-	private final String tagClass;
-	private final String teiClass;
-	private final String bodyContent;
-	private final Map<String, Attribute> attribute;
-	private final List<Attribute> attributes;
-	private final boolean dynamicAttributes;
-	// TODO: Variables
+	private final String functionClass;
+	private final String functionSignature;
 	private final String example;
 
 	private final String descriptionSummary;
 
-	public Tag(
+	private final static Pattern FUNCTION_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "functionSignature" + XmlHelper.PATTERN_POST);
+
+	public Function(
 		String summaryClass,
 		Taglib taglib,
-		Element tagElem
+		Element functionElem
 	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		this.taglib = taglib;
 
-		this.name = XmlUtils.getChildTextContent(tagElem, "name");
+		this.name = XmlUtils.getChildTextContent(functionElem, "name");
 
-		this.dates = Dates.fromComments(tagElem, taglib.getDates());
+		this.dates = Dates.fromComments(functionElem, taglib.getDates());
 		this.dates.checkNotBefore(taglib.getTldPath() + "/" + name, taglib.getTldPath(), taglib.getDates());
 
-		this.allowRobots = XmlHelper.parseAllowRobots(tagElem);
+		this.allowRobots = XmlHelper.parseAllowRobots(functionElem);
 
 		List<String> newDescriptions = new ArrayList<>();
-		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(tagElem, "description")) {
+		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(functionElem, "description")) {
 			newDescriptions.add(descriptionElem.getTextContent());
 		}
 		this.descriptions = AoCollections.optimalUnmodifiableList(newDescriptions);
 
 		List<String> newDisplayNames = new ArrayList<>();
-		for(Element displayNameElem : XmlUtils.iterableChildElementsByTagName(tagElem, "display-name")) {
+		for(Element displayNameElem : XmlUtils.iterableChildElementsByTagName(functionElem, "display-name")) {
 			newDisplayNames.add(displayNameElem.getTextContent());
 		}
 		this.displayNames = AoCollections.optimalUnmodifiableList(newDisplayNames);
 
-		this.tagClass = XmlUtils.getChildTextContent(tagElem, "tag-class");
-		this.teiClass = XmlUtils.getChildTextContent(tagElem, "tei-class");
-		this.bodyContent = XmlUtils.getChildTextContent(tagElem, "body-content");
-
-		Map<String, Attribute> newAttributes = new LinkedHashMap<>();
-		for(Element attributeElem : XmlUtils.iterableChildElementsByTagName(tagElem, "attribute")) {
-			Attribute newAttribute = new Attribute(summaryClass, this, attributeElem);
-			String attributeName = newAttribute.getName();
-			if(newAttributes.put(attributeName, newAttribute) != null) throw new IllegalArgumentException("Duplicate attribute name: " + attributeName);
-		}
-		this.attribute = AoCollections.optimalUnmodifiableMap(newAttributes);
-		this.attributes = AoCollections.optimalUnmodifiableList(new ArrayList<>(newAttributes.values()));
-
-		this.dynamicAttributes = Boolean.parseBoolean(XmlUtils.getChildTextContent(tagElem, "dynamic-attributes"));
-		if(XmlUtils.iterableChildElementsByTagName(tagElem, "variable").iterator().hasNext()) {
-			throw new NotImplementedException("TODO: Document variables when first needed.  We don't use any variables at this time.");
-		}
-		this.example = XmlUtils.getChildTextContent(tagElem, "example");
+		this.functionClass = XmlUtils.getChildTextContent(functionElem, "function-class");
+		this.functionSignature = XmlHelper.getChildWithGenerics(functionElem, "function-signature", FUNCTION_SIGNATURE_PATTERN, "functionSignature");
+		this.example = XmlUtils.getChildTextContent(functionElem, "example");
 
 		try {
 			this.descriptionSummary = descriptions.isEmpty() ? null : HtmlSnippet.getSummary(summaryClass, descriptions.get(0));
@@ -109,6 +95,19 @@ public class Tag {
 			wrapped.initCause(e);
 			throw wrapped;
 		}
+	}
+
+	/**
+	 * @deprecated  {@code apiLinks} is unused, please use {@link #Function(java.lang.String, com.aoapps.tldparser.Taglib, org.w3c.dom.Element)} instead.
+	 */
+	@Deprecated
+	public Function(
+		String summaryClass,
+		Taglib taglib,
+		Element functionElem,
+		Map<String, String> apiLinks
+	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+		this(summaryClass, taglib, functionElem);
 	}
 
 	public Taglib getTaglib() {
@@ -137,30 +136,12 @@ public class Tag {
 		return name;
 	}
 
-	public String getTagClass() {
-		return tagClass;
+	public String getFunctionClass() {
+		return functionClass;
 	}
 
-	public String getTeiClass() {
-		return teiClass;
-	}
-
-	public String getBodyContent() {
-		return bodyContent;
-	}
-
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public Map<String, Attribute> getAttribute() {
-		return attribute;
-	}
-
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public List<Attribute> getAttributes() {
-		return attributes;
-	}
-
-	public boolean getDynamicAttributes() {
-		return dynamicAttributes;
+	public String getFunctionSignature() {
+		return functionSignature;
 	}
 
 	public String getExample() {

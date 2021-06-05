@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.tld.parser;
+package com.aoapps.tldparser;
 
-import com.aoindustries.lang.Coercion;
+import com.aoapps.lang.Coercion;
 import java.io.StringReader;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;

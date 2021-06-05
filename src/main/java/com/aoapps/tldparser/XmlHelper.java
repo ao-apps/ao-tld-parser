@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.tld.parser;
+package com.aoapps.tldparser;
 
-import com.aoindustries.xml.XmlUtils;
+import com.aoapps.lang.xml.XmlUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.w3c.dom.Comment;
