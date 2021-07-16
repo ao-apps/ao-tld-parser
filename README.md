@@ -9,6 +9,12 @@
 
 [![Build](https://github.com/aoindustries/ao-tld-parser/workflows/Build/badge.svg?branch=master)](https://github.com/aoindustries/ao-tld-parser/actions?query=workflow%3ABuild)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.aoapps/ao-tld-parser/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.aoapps/ao-tld-parser)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-tld-parser&metric=alert_status)](https://sonarcloud.io/dashboard?branch=master&id=com.aoapps%3Aao-tld-parser)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-tld-parser&metric=ncloc)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-tld-parser&metric=ncloc)  
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-tld-parser&metric=reliability_rating)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-tld-parser&metric=Reliability)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-tld-parser&metric=security_rating)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-tld-parser&metric=Security)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-tld-parser&metric=sqale_rating)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-tld-parser&metric=Maintainability)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-tld-parser&metric=coverage)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-tld-parser&metric=Coverage)
 
 Parses [JSP tag library](https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.html) *.tld files.
 

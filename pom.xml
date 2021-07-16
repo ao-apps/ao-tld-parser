@@ -37,7 +37,7 @@ along with ao-tld-parser.  If not, see <http://www.gnu.org/licenses />.
 		<javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://oss.aoapps.com/">AO OSS</a>
 / <a target="${javadoc.target}" href="${project.url}">TLD Parser</a>]]></javadoc.breadcrumbs>
 		<description.html><![CDATA[Parses <a target="${javadoc.target}" rel="nofollow" href="https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.html">JSP tag library</a> *.tld files.]]></description.html>
-		<!-- SonarCloud.io -->
+		<!-- SonarQube -->
 		<sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
 		<sonar.organization>aoindustries</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
