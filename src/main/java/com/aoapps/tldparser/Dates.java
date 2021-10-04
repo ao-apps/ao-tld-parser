@@ -92,10 +92,10 @@ public class Dates {
 		);
 	}
 
-	final static Pattern DATE_CREATED_PATTERN   = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_CREATED   + XmlHelper.PATTERN_POST);
-	final static Pattern DATE_PUBLISHED_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_PUBLISHED + XmlHelper.PATTERN_POST);
-	final static Pattern DATE_MODIFIED_PATTERN  = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_MODIFIED  + XmlHelper.PATTERN_POST);
-	final static Pattern DATE_REVIEWED_PATTERN  = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_REVIEWED  + XmlHelper.PATTERN_POST);
+	static final Pattern DATE_CREATED_PATTERN   = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_CREATED   + XmlHelper.PATTERN_POST);
+	static final Pattern DATE_PUBLISHED_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_PUBLISHED + XmlHelper.PATTERN_POST);
+	static final Pattern DATE_MODIFIED_PATTERN  = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_MODIFIED  + XmlHelper.PATTERN_POST);
+	static final Pattern DATE_REVIEWED_PATTERN  = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_REVIEWED  + XmlHelper.PATTERN_POST);
 
 	/**
 	 * Parse dates from special comments directly within a given {@link Element}.

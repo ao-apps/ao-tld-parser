@@ -38,7 +38,7 @@ public class DeferredMethod {
 	private final Attribute attribute;
 	private final String methodSignature;
 
-	private final static Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "methodSignature" + XmlHelper.PATTERN_POST);
+	private static final Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "methodSignature" + XmlHelper.PATTERN_POST);
 
 	public DeferredMethod(
 		Attribute attribute,

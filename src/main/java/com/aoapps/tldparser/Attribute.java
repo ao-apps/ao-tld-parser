@@ -55,7 +55,7 @@ public class Attribute {
 
 	private final String descriptionSummary;
 
-	private final static Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
+	private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
 
 	public Attribute(
 		String summaryClass,

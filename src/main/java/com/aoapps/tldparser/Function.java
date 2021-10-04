@@ -56,7 +56,7 @@ public class Function {
 
 	private final String descriptionSummary;
 
-	private final static Pattern FUNCTION_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "functionSignature" + XmlHelper.PATTERN_POST);
+	private static final Pattern FUNCTION_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "functionSignature" + XmlHelper.PATTERN_POST);
 
 	public Function(
 		String summaryClass,
