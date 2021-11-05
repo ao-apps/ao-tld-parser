@@ -37,12 +37,13 @@ import org.w3c.dom.NodeList;
  * This allows for the generics information to be included in
  * comments, that will be parsed and included for display.
  */
-class XmlHelper {
+abstract class XmlHelper {
+
+	/** Make no instances. */
+	private XmlHelper() {throw new AssertionError();}
 
 	static final String PATTERN_PRE  = "^\\s*";
 	static final String PATTERN_POST = "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)')\\s*$";
-
-	private XmlHelper() {}
 
 	/**
 	 * Looks for a comment that defines a variable of the given name using the

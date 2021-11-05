@@ -35,7 +35,10 @@ import org.xml.sax.InputSource;
 /**
  * Extracts summaries from descriptions.
  */
-public class HtmlSnippet {
+public abstract class HtmlSnippet {
+
+	/** Make no instances. */
+	private HtmlSnippet() {throw new AssertionError();}
 
 	/**
 	 * Displays all elements with class="<var>summaryClass</var>" of the provided HTML snippet.
@@ -72,6 +75,4 @@ public class HtmlSnippet {
 			return htmlSnippet;
 		}
 	}
-
-	private HtmlSnippet() {}
 }
