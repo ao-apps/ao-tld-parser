@@ -138,7 +138,7 @@ public class Taglib {
 	/**
 	 * @deprecated  {@code apiLinks} is unused, please use {@link #Taglib(java.lang.String, java.lang.String, com.aoapps.tldparser.Dates, org.w3c.dom.Document)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public Taglib(
 		String summaryClass,
 		String tldPath,

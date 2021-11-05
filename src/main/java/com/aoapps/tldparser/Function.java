@@ -100,7 +100,7 @@ public class Function {
 	/**
 	 * @deprecated  {@code apiLinks} is unused, please use {@link #Function(java.lang.String, com.aoapps.tldparser.Taglib, org.w3c.dom.Element)} instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public Function(
 		String summaryClass,
 		Taglib taglib,
