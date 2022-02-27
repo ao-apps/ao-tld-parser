@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019, 2021  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -35,7 +35,7 @@ import org.xml.sax.InputSource;
 /**
  * Extracts summaries from descriptions.
  */
-public abstract class HtmlSnippet {
+public final class HtmlSnippet {
 
 	/** Make no instances. */
 	private HtmlSnippet() {throw new AssertionError();}
