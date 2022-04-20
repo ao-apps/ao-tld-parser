@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2021  AO Industries, Inc.
+ * Copyright (C) 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -21,12 +21,12 @@
  * along with ao-tld-parser.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.aoapps.tldparser {
-	exports com.aoapps.tldparser;
-	// Direct
-	requires com.aoapps.collections; // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
-	requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
-	requires org.apache.commons.lang3; // <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
-	requires org.joda.time; // <groupId>joda-time</groupId><artifactId>joda-time</artifactId>
-	// Java SE
-	requires java.xml;
+  exports com.aoapps.tldparser;
+  // Direct
+  requires com.aoapps.collections; // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
+  requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
+  requires org.apache.commons.lang3; // <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
+  requires org.joda.time; // <groupId>joda-time</groupId><artifactId>joda-time</artifactId>
+  // Java SE
+  requires java.xml;
 }

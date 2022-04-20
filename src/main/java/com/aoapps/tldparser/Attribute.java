@@ -44,99 +44,99 @@ import org.w3c.dom.Element;
  */
 public class Attribute {
 
-	private final Tag tag;
-	private final List<String> descriptions;
-	private final String name;
-	private final boolean required;
-	private final boolean rtexprvalue;
-	private final boolean fragment;
-	private final String type;
-	private final DeferredMethod deferredMethod;
-	private final DeferredValue deferredValue;
+  private final Tag tag;
+  private final List<String> descriptions;
+  private final String name;
+  private final boolean required;
+  private final boolean rtexprvalue;
+  private final boolean fragment;
+  private final String type;
+  private final DeferredMethod deferredMethod;
+  private final DeferredValue deferredValue;
 
-	private final String descriptionSummary;
+  private final String descriptionSummary;
 
-	private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
+  private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
 
-	public Attribute(
-		String summaryClass,
-		Tag tag,
-		Element attributeElem
-	) throws XPathExpressionException {
-		this.tag = tag;
+  public Attribute(
+    String summaryClass,
+    Tag tag,
+    Element attributeElem
+  ) throws XPathExpressionException {
+    this.tag = tag;
 
-		List<String> newDescriptions = new ArrayList<>();
-		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(attributeElem, "description")) {
-			newDescriptions.add(descriptionElem.getTextContent());
-		}
-		this.descriptions = AoCollections.optimalUnmodifiableList(newDescriptions);
+    List<String> newDescriptions = new ArrayList<>();
+    for (Element descriptionElem : XmlUtils.iterableChildElementsByTagName(attributeElem, "description")) {
+      newDescriptions.add(descriptionElem.getTextContent());
+    }
+    this.descriptions = AoCollections.optimalUnmodifiableList(newDescriptions);
 
-		this.name = XmlUtils.getChildTextContent(attributeElem, "name");
-		this.required = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "required"));
-		this.rtexprvalue = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "rtexprvalue"));
-		this.fragment = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "fragment"));
-		this.type = XmlHelper.getChildWithGenerics(attributeElem, "type", TYPE_PATTERN, "type");
+    this.name = XmlUtils.getChildTextContent(attributeElem, "name");
+    this.required = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "required"));
+    this.rtexprvalue = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "rtexprvalue"));
+    this.fragment = Boolean.parseBoolean(XmlUtils.getChildTextContent(attributeElem, "fragment"));
+    this.type = XmlHelper.getChildWithGenerics(attributeElem, "type", TYPE_PATTERN, "type");
 
-		Element deferredMethodElem = XmlUtils.getChildElementByTagName(attributeElem, "deferred-method");
-		this.deferredMethod = deferredMethodElem == null ? null : new DeferredMethod(this, deferredMethodElem);
+    Element deferredMethodElem = XmlUtils.getChildElementByTagName(attributeElem, "deferred-method");
+    this.deferredMethod = deferredMethodElem == null ? null : new DeferredMethod(this, deferredMethodElem);
 
-		Element deferredValueElem = XmlUtils.getChildElementByTagName(attributeElem, "deferred-value");
-		this.deferredValue = deferredValueElem == null ? null : new DeferredValue(this, deferredValueElem);
+    Element deferredValueElem = XmlUtils.getChildElementByTagName(attributeElem, "deferred-value");
+    this.deferredValue = deferredValueElem == null ? null : new DeferredValue(this, deferredValueElem);
 
-		try {
-			this.descriptionSummary = descriptions.isEmpty() ? null : HtmlSnippet.getSummary(summaryClass, descriptions.get(0));
-		} catch(XPathExpressionException e) {
-			XPathExpressionException wrapped = new XPathExpressionException(tag.getTaglib().getTldPath() + "/" + tag.getName() + "/" + name + "/description: " + e.getMessage());
-			wrapped.initCause(e);
-			throw wrapped;
-		}
-	}
+    try {
+      this.descriptionSummary = descriptions.isEmpty() ? null : HtmlSnippet.getSummary(summaryClass, descriptions.get(0));
+    } catch (XPathExpressionException e) {
+      XPathExpressionException wrapped = new XPathExpressionException(tag.getTaglib().getTldPath() + "/" + tag.getName() + "/" + name + "/description: " + e.getMessage());
+      wrapped.initCause(e);
+      throw wrapped;
+    }
+  }
 
-	public Tag getTag() {
-		return tag;
-	}
+  public Tag getTag() {
+    return tag;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public List<String> getDescriptions() {
-		return descriptions;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public List<String> getDescriptions() {
+    return descriptions;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public boolean getRequired() {
-		return required;
-	}
+  public boolean getRequired() {
+    return required;
+  }
 
-	public boolean getRtexprvalue() {
-		return rtexprvalue;
-	}
+  public boolean getRtexprvalue() {
+    return rtexprvalue;
+  }
 
-	public boolean getFragment() {
-		return fragment;
-	}
+  public boolean getFragment() {
+    return fragment;
+  }
 
-	public String getType() {
-		return type;
-	}
+  public String getType() {
+    return type;
+  }
 
-	public DeferredMethod getDeferredMethod() {
-		return deferredMethod;
-	}
+  public DeferredMethod getDeferredMethod() {
+    return deferredMethod;
+  }
 
-	public DeferredValue getDeferredValue() {
-		return deferredValue;
-	}
+  public DeferredValue getDeferredValue() {
+    return deferredValue;
+  }
 
-	/**
-	 * Gets a summary of the description.
-	 * If there is more than once description, only the first is used in generating the summary.
-	 * If there are no descriptions, returns {@code null}.
-	 *
-	 * @see  HtmlSnippet#getSummary(java.lang.String, java.lang.String)
-	 */
-	public String getDescriptionSummary() {
-		return descriptionSummary;
-	}
+  /**
+   * Gets a summary of the description.
+   * If there is more than once description, only the first is used in generating the summary.
+   * If there are no descriptions, returns {@code null}.
+   *
+   * @see  HtmlSnippet#getSummary(java.lang.String, java.lang.String)
+   */
+  public String getDescriptionSummary() {
+    return descriptionSummary;
+  }
 }

@@ -35,123 +35,123 @@ import org.junit.Test;
  */
 public class DatesTest {
 
-	@Test
-	public void testNoMatch() {
-		assertFalse(Dates.DATE_CREATED_PATTERN.matcher("This has no match").matches());
-	}
+  @Test
+  public void testNoMatch() {
+    assertFalse(Dates.DATE_CREATED_PATTERN.matcher("This has no match").matches());
+  }
 
-	@Test
-	public void testMustBeStandaloneComment() {
-		// Must be in own standalone comment
-		assertFalse(Dates.DATE_CREATED_PATTERN.matcher("foo dateCreated=\"AO\"").matches());
-		assertFalse(Dates.DATE_CREATED_PATTERN.matcher("dateCreated=\"AO\" bar").matches());
-		assertFalse(Dates.DATE_CREATED_PATTERN.matcher("foo dateCreated=\"AO\" bar").matches());
-	}
+  @Test
+  public void testMustBeStandaloneComment() {
+    // Must be in own standalone comment
+    assertFalse(Dates.DATE_CREATED_PATTERN.matcher("foo dateCreated=\"AO\"").matches());
+    assertFalse(Dates.DATE_CREATED_PATTERN.matcher("dateCreated=\"AO\" bar").matches());
+    assertFalse(Dates.DATE_CREATED_PATTERN.matcher("foo dateCreated=\"AO\" bar").matches());
+  }
 
-	@Test
-	public void testQuoteMismatch() {
-		// Also mismatched quote types should be ignored
-		assertFalse(Dates.DATE_CREATED_PATTERN.matcher("dateCreated=\"AO'").matches());
-		assertFalse(Dates.DATE_CREATED_PATTERN.matcher("dateCreated='AO\"").matches());
-	}
+  @Test
+  public void testQuoteMismatch() {
+    // Also mismatched quote types should be ignored
+    assertFalse(Dates.DATE_CREATED_PATTERN.matcher("dateCreated=\"AO'").matches());
+    assertFalse(Dates.DATE_CREATED_PATTERN.matcher("dateCreated='AO\"").matches());
+  }
 
-	@Test
-	public void testDoubleQuotedMatchFullString() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated=\"AO\"");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertEquals("AO", m.group(1));
-		assertNull(m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testDoubleQuotedMatchFullString() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated=\"AO\"");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertEquals("AO", m.group(1));
+    assertNull(m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testSingleQuotedMatchFullString() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated='AO'");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertNull(m.group(1));
-		assertEquals("AO", m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testSingleQuotedMatchFullString() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated='AO'");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertNull(m.group(1));
+    assertEquals("AO", m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testDoubleQuotedMatchPreWhitespace() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("   dateCreated=\"AO\"");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertEquals("AO", m.group(1));
-		assertNull(m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testDoubleQuotedMatchPreWhitespace() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("   dateCreated=\"AO\"");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertEquals("AO", m.group(1));
+    assertNull(m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testSingleQuotedMatchPreWhitespace() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("   dateCreated='AO'");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertNull(m.group(1));
-		assertEquals("AO", m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testSingleQuotedMatchPreWhitespace() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("   dateCreated='AO'");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertNull(m.group(1));
+    assertEquals("AO", m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testDoubleQuotedMatchPostWhitespace() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated=\"AO\"   ");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertEquals("AO", m.group(1));
-		assertNull(m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testDoubleQuotedMatchPostWhitespace() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated=\"AO\"   ");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertEquals("AO", m.group(1));
+    assertNull(m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testSingleQuotedMatchPostWhitespace() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated='AO'   ");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertNull(m.group(1));
-		assertEquals("AO", m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testSingleQuotedMatchPostWhitespace() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated='AO'   ");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertNull(m.group(1));
+    assertEquals("AO", m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testDoubleQuotedMatchMidLeftWhitespace() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated   =\"AO\"");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertEquals("AO", m.group(1));
-		assertNull(m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testDoubleQuotedMatchMidLeftWhitespace() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated   =\"AO\"");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertEquals("AO", m.group(1));
+    assertNull(m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testSingleQuotedMatchMidLeftWhitespace() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated   ='AO'");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertNull(m.group(1));
-		assertEquals("AO", m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testSingleQuotedMatchMidLeftWhitespace() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated   ='AO'");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertNull(m.group(1));
+    assertEquals("AO", m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testDoubleQuotedMatchMidRightWhitespace() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated=   \"AO\"");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertEquals("AO", m.group(1));
-		assertNull(m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testDoubleQuotedMatchMidRightWhitespace() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated=   \"AO\"");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertEquals("AO", m.group(1));
+    assertNull(m.group(2));
+    assertFalse(m.find());
+  }
 
-	@Test
-	public void testSingleQuotedMatchMidRightWhitespace() {
-		Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated=   'AO'");
-		assertTrue(m.find());
-		assertEquals(2, m.groupCount());
-		assertNull(m.group(1));
-		assertEquals("AO", m.group(2));
-		assertFalse(m.find());
-	}
+  @Test
+  public void testSingleQuotedMatchMidRightWhitespace() {
+    Matcher m = Dates.DATE_CREATED_PATTERN.matcher("dateCreated=   'AO'");
+    assertTrue(m.find());
+    assertEquals(2, m.groupCount());
+    assertNull(m.group(1));
+    assertEquals("AO", m.group(2));
+    assertFalse(m.find());
+  }
 }

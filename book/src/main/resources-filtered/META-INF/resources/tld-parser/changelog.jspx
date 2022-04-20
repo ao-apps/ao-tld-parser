@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-tld-parser - Parses JSP tag library *.tld files.
-Copyright (C) 2019, 2020, 2021  AO Industries, Inc.
+Copyright (C) 2019, 2020, 2021, 2022  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -22,151 +22,151 @@ You should have received a copy of the GNU Lesser General Public License
 along with ao-tld-parser.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <jsp:root
-	xmlns:ao="https://oss.aoapps.com/taglib/"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:changelog="https://semanticcms.com/changelog/taglib/"
-	xmlns:core="https://semanticcms.com/core/taglib/"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:jsp="http://java.sun.com/JSP/Page"
-	version="2.1"
+  xmlns:ao="https://oss.aoapps.com/taglib/"
+  xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:changelog="https://semanticcms.com/changelog/taglib/"
+  xmlns:core="https://semanticcms.com/core/taglib/"
+  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+  xmlns:jsp="http://java.sun.com/JSP/Page"
+  version="2.1"
 >
-	<jsp:directive.page language="java" pageEncoding="UTF-8" />
-	<jsp:directive.page session="false" />
-	<core:page
-		title="@{documented.name} Changelog"
-		shortTitle="Changelog"
-		tocLevels="1"
-		datePublished="2019-06-12T18:28:39-05:00"
-		dateModified="2021-07-06T08:56:02-05:00"
-	>
-		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
-			<changelog:release
-				projectName="@{documented.name}"
-				version="@{project.version}"
-				groupId="@{project.groupId}"
-				artifactId="@{documented.artifactId}"
-				repository="@{nexusUrl}content/repositories/snapshots/"
-				scmUrl="@{project.scm.url}"
-			/>
-		</c:if>
+  <jsp:directive.page language="java" pageEncoding="UTF-8" />
+  <jsp:directive.page session="false" />
+  <core:page
+    title="@{documented.name} Changelog"
+    shortTitle="Changelog"
+    tocLevels="1"
+    datePublished="2019-06-12T18:28:39-05:00"
+    dateModified="2021-07-06T08:56:02-05:00"
+  >
+    <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
+      <changelog:release
+        projectName="@{documented.name}"
+        version="@{project.version}"
+        groupId="@{project.groupId}"
+        artifactId="@{documented.artifactId}"
+        repository="@{nexusUrl}content/repositories/snapshots/"
+        scmUrl="@{project.scm.url}"
+      />
+    </c:if>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="2.0.0"
-			datePublished="2021-07-06T08:56:02-05:00"
-			groupId="@{project.groupId}"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Minimum Java version changed from 1.8 to 11.</li>
-				<li>Now supports Java 9+ modules with included <code>module-info.class</code>.</li>
-				<li>Maven artifact relocated from <code>com.aoindustries:ao-tld-parser</code> to <code>com.aoapps:ao-tld-parser</code>.</li>
-				<li>Package renamed from <code>com.aoindustries.tld.parser</code> to <code>com.aoapps.tldparser</code>.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="2.0.0"
+      datePublished="2021-07-06T08:56:02-05:00"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Minimum Java version changed from 1.8 to 11.</li>
+        <li>Now supports Java 9+ modules with included <code>module-info.class</code>.</li>
+        <li>Maven artifact relocated from <code>com.aoindustries:ao-tld-parser</code> to <code>com.aoapps:ao-tld-parser</code>.</li>
+        <li>Package renamed from <code>com.aoindustries.tld.parser</code> to <code>com.aoapps.tldparser</code>.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.2.1"
-			datePublished="2021-02-14T09:05:36-06:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Updated dependencies.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.2.1"
+      datePublished="2021-02-14T09:05:36-06:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Updated dependencies.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.2.0"
-			datePublished="2020-11-24T21:10:47-06:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Added support for <code>allowRobots</code> parsed from comments within the *.tld files.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.2.0"
+      datePublished="2020-11-24T21:10:47-06:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Added support for <code>allowRobots</code> parsed from comments within the *.tld files.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.1.0"
-			datePublished="2020-06-11T03:21:57-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					Removed unused parameter <code>apiLinks</code> from both
-					<code>Function</code> and <code>Taglib</code>.
-				</li>
-				<li>
-					Now supporting the documentation of generics for signatures and types.
-					As this is not part of the spec, the generics are optionally given in
-					a comment next to the signature or type element, similar
-					to how dates are defined (such as <code>dateCreated</code>).
-				</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.1.0"
+      datePublished="2020-06-11T03:21:57-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          Removed unused parameter <code>apiLinks</code> from both
+          <code>Function</code> and <code>Taglib</code>.
+        </li>
+        <li>
+          Now supporting the documentation of generics for signatures and types.
+          As this is not part of the spec, the generics are optionally given in
+          a comment next to the signature or type element, similar
+          to how dates are defined (such as <code>dateCreated</code>).
+        </li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.0.2"
-			datePublished="2020-03-27T15:56:40-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Minimum Java version changed from 1.7 to 1.8.</li>
-				<li>
-					Reduced use of property substitutions in <code>pom.xml</code>.
-					This is to help 3rd-party parsers that fail to perform full Maven-compatible substitutions.
-				</li>
-				<li>Updated dependencies.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.0.2"
+      datePublished="2020-03-27T15:56:40-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Minimum Java version changed from 1.7 to 1.8.</li>
+        <li>
+          Reduced use of property substitutions in <code>pom.xml</code>.
+          This is to help 3rd-party parsers that fail to perform full Maven-compatible substitutions.
+        </li>
+        <li>Updated dependencies.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.0.1"
-			datePublished="2019-10-04T05:26:07-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>Updated dependencies.</li>
-			</ul>
-		</changelog:release>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.0.1"
+      datePublished="2019-10-04T05:26:07-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Updated dependencies.</li>
+      </ul>
+    </changelog:release>
 
-		<changelog:release
-			projectName="@{documented.name}"
-			version="1.0.0"
-			datePublished="2019-06-20T15:22:38-05:00"
-			groupId="com.aoindustries"
-			artifactId="@{documented.artifactId}"
-			scmUrl="@{project.scm.url}"
-		>
-			<ul>
-				<li>
-					JSP taglib parser pulled out of <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
-					into its own project.
-				</li>
-				<li>
-					Added support for <code>dateCreated</code>, <code>datePublished</code>, <code>dateModified</code>, and <code>dateReviewed</code> parsed from comments within the *.tld files.
-					<p>
-						This allows <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
-						to provide these dates, which are provided to search engines via
-						<ao:a href="https://semanticcms.com/core/sitemap/">SemanticCMS Core Sitemap</ao:a>.
-					</p>
-				</li>
-			</ul>
-		</changelog:release>
-	</core:page>
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.0.0"
+      datePublished="2019-06-20T15:22:38-05:00"
+      groupId="com.aoindustries"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>
+          JSP taglib parser pulled out of <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
+          into its own project.
+        </li>
+        <li>
+          Added support for <code>dateCreated</code>, <code>datePublished</code>, <code>dateModified</code>, and <code>dateReviewed</code> parsed from comments within the *.tld files.
+          <p>
+            This allows <ao:a href="https://semanticcms.com/tag-reference/">SemanticCMS Tag Reference</ao:a>
+            to provide these dates, which are provided to search engines via
+            <ao:a href="https://semanticcms.com/core/sitemap/">SemanticCMS Core Sitemap</ao:a>.
+          </p>
+        </li>
+      </ul>
+    </changelog:release>
+  </core:page>
 </jsp:root>

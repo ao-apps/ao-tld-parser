@@ -53,179 +53,183 @@ import org.xml.sax.SAXException;
  */
 public class Taglib {
 
-	private final String tldPath;
-	private final Dates dates;
-	private final Boolean allowRobots;
-	private final List<String> descriptions;
-	private final List<String> displayNames;
-	private final String tlibVersion;
-	private final String shortName;
-	private final String uri;
-	private final Map<String, Tag> tag;
-	private final List<Tag> tags;
-	private final Dates tagsEffectiveDates;
-	private final Map<String, Function> function;
-	private final List<Function> functions;
-	private final Dates functionsEffectiveDates;
-	private final Dates taglibEffectiveDates;
+  private final String tldPath;
+  private final Dates dates;
+  private final Boolean allowRobots;
+  private final List<String> descriptions;
+  private final List<String> displayNames;
+  private final String tlibVersion;
+  private final String shortName;
+  private final String uri;
+  private final Map<String, Tag> tag;
+  private final List<Tag> tags;
+  private final Dates tagsEffectiveDates;
+  private final Map<String, Function> function;
+  private final List<Function> functions;
+  private final Dates functionsEffectiveDates;
+  private final Dates taglibEffectiveDates;
 
-	/**
-	 * Extracts the components of an XML-parsed *.tld file.
-	 *
-	 * @param summaryClass  The CSS class that marks elements to be included in summaries
-	 * @param tldPath  The path to the taglib, used for error messages only
-	 * @param defaultDates  The optional default dates for when no date-comments found
-	 * @param tldDoc  The document that has already been parsed
-	 */
-	public Taglib(
-		String summaryClass,
-		String tldPath,
-		Dates defaultDates,
-		Document tldDoc
-	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
-		this.tldPath = tldPath;
+  /**
+   * Extracts the components of an XML-parsed *.tld file.
+   *
+   * @param summaryClass  The CSS class that marks elements to be included in summaries
+   * @param tldPath  The path to the taglib, used for error messages only
+   * @param defaultDates  The optional default dates for when no date-comments found
+   * @param tldDoc  The document that has already been parsed
+   */
+  public Taglib(
+    String summaryClass,
+    String tldPath,
+    Dates defaultDates,
+    Document tldDoc
+  ) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+    this.tldPath = tldPath;
 
-		Element taglibElem = tldDoc.getDocumentElement();
+    Element taglibElem = tldDoc.getDocumentElement();
 
-		this.dates = Dates.fromComments(taglibElem, defaultDates);
+    this.dates = Dates.fromComments(taglibElem, defaultDates);
 
-		this.allowRobots = XmlHelper.parseAllowRobots(taglibElem);
+    this.allowRobots = XmlHelper.parseAllowRobots(taglibElem);
 
-		List<String> newDescriptions = new ArrayList<>();
-		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "description")) {
-			newDescriptions.add(descriptionElem.getTextContent());
-		}
-		this.descriptions = AoCollections.optimalUnmodifiableList(newDescriptions);
+    List<String> newDescriptions = new ArrayList<>();
+    for (Element descriptionElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "description")) {
+      newDescriptions.add(descriptionElem.getTextContent());
+    }
+    this.descriptions = AoCollections.optimalUnmodifiableList(newDescriptions);
 
-		List<String> newDisplayNames = new ArrayList<>();
-		for(Element displayNameElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "display-name")) {
-			newDisplayNames.add(displayNameElem.getTextContent());
-		}
-		this.displayNames = AoCollections.optimalUnmodifiableList(newDisplayNames);
+    List<String> newDisplayNames = new ArrayList<>();
+    for (Element displayNameElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "display-name")) {
+      newDisplayNames.add(displayNameElem.getTextContent());
+    }
+    this.displayNames = AoCollections.optimalUnmodifiableList(newDisplayNames);
 
-		this.tlibVersion = XmlUtils.getChildTextContent(taglibElem, "tlib-version");
-		this.shortName = XmlUtils.getChildTextContent(taglibElem, "short-name");
-		this.uri = XmlUtils.getChildTextContent(taglibElem, "uri");
+    this.tlibVersion = XmlUtils.getChildTextContent(taglibElem, "tlib-version");
+    this.shortName = XmlUtils.getChildTextContent(taglibElem, "short-name");
+    this.uri = XmlUtils.getChildTextContent(taglibElem, "uri");
 
-		Map<String, Tag> newTags = new LinkedHashMap<>();
-		Dates newTagsEffectiveDates = null;
-		for(Element tagElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "tag")) {
-			Tag newTag = new Tag(summaryClass, this, tagElem);
-			String tagName = newTag.getName();
-			if(newTags.put(tagName, newTag) != null) throw new IllegalArgumentException("Duplicate tag name: " + tagName);
-			newTagsEffectiveDates = Dates.merge(newTagsEffectiveDates, newTag.getDates());
-		}
-		this.tag = AoCollections.optimalUnmodifiableMap(newTags);
-		this.tags = AoCollections.optimalUnmodifiableList(new ArrayList<>(newTags.values()));
-		this.tagsEffectiveDates = newTagsEffectiveDates;
+    Map<String, Tag> newTags = new LinkedHashMap<>();
+    Dates newTagsEffectiveDates = null;
+    for (Element tagElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "tag")) {
+      Tag newTag = new Tag(summaryClass, this, tagElem);
+      String tagName = newTag.getName();
+      if (newTags.put(tagName, newTag) != null) {
+        throw new IllegalArgumentException("Duplicate tag name: " + tagName);
+      }
+      newTagsEffectiveDates = Dates.merge(newTagsEffectiveDates, newTag.getDates());
+    }
+    this.tag = AoCollections.optimalUnmodifiableMap(newTags);
+    this.tags = AoCollections.optimalUnmodifiableList(new ArrayList<>(newTags.values()));
+    this.tagsEffectiveDates = newTagsEffectiveDates;
 
-		Map<String, Function> newFunctions = new LinkedHashMap<>();
-		Dates newFunctionsEffectiveDates = null;
-		for(Element functionElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "function")) {
-			Function newFunction = new Function(summaryClass, this, functionElem);
-			String functionName = newFunction.getName();
-			if(newFunctions.put(functionName, newFunction) != null) throw new IllegalArgumentException("Duplicate function name: " + functionName);
-			newFunctionsEffectiveDates = Dates.merge(newFunctionsEffectiveDates, newFunction.getDates());
-		}
-		this.function = AoCollections.optimalUnmodifiableMap(newFunctions);
-		this.functions = AoCollections.optimalUnmodifiableList(new ArrayList<>(newFunctions.values()));
-		this.functionsEffectiveDates = newFunctionsEffectiveDates;
-		this.taglibEffectiveDates = Dates.merge(
-			Dates.merge(this.dates, this.tagsEffectiveDates),
-			this.functionsEffectiveDates
-		);
-	}
+    Map<String, Function> newFunctions = new LinkedHashMap<>();
+    Dates newFunctionsEffectiveDates = null;
+    for (Element functionElem : XmlUtils.iterableChildElementsByTagName(taglibElem, "function")) {
+      Function newFunction = new Function(summaryClass, this, functionElem);
+      String functionName = newFunction.getName();
+      if (newFunctions.put(functionName, newFunction) != null) {
+        throw new IllegalArgumentException("Duplicate function name: " + functionName);
+      }
+      newFunctionsEffectiveDates = Dates.merge(newFunctionsEffectiveDates, newFunction.getDates());
+    }
+    this.function = AoCollections.optimalUnmodifiableMap(newFunctions);
+    this.functions = AoCollections.optimalUnmodifiableList(new ArrayList<>(newFunctions.values()));
+    this.functionsEffectiveDates = newFunctionsEffectiveDates;
+    this.taglibEffectiveDates = Dates.merge(
+      Dates.merge(this.dates, this.tagsEffectiveDates),
+      this.functionsEffectiveDates
+    );
+  }
 
-	/**
-	 * @deprecated  {@code apiLinks} is unused, please use {@link #Taglib(java.lang.String, java.lang.String, com.aoapps.tldparser.Dates, org.w3c.dom.Document)} instead.
-	 */
-	@Deprecated(forRemoval = true)
-	public Taglib(
-		String summaryClass,
-		String tldPath,
-		Dates defaultDates,
-		Document tldDoc,
-		Map<String, String> apiLinks
-	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
-		this(summaryClass, tldPath, defaultDates, tldDoc);
-	}
+  /**
+   * @deprecated  {@code apiLinks} is unused, please use {@link #Taglib(java.lang.String, java.lang.String, com.aoapps.tldparser.Dates, org.w3c.dom.Document)} instead.
+   */
+  @Deprecated(forRemoval = true)
+  public Taglib(
+    String summaryClass,
+    String tldPath,
+    Dates defaultDates,
+    Document tldDoc,
+    Map<String, String> apiLinks
+  ) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+    this(summaryClass, tldPath, defaultDates, tldDoc);
+  }
 
-	public String getTldPath() {
-		return tldPath;
-	}
+  public String getTldPath() {
+    return tldPath;
+  }
 
-	public Dates getDates() {
-		return dates;
-	}
+  public Dates getDates() {
+    return dates;
+  }
 
-	public Boolean getAllowRobots() {
-		return allowRobots;
-	}
+  public Boolean getAllowRobots() {
+    return allowRobots;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public List<String> getDescriptions() {
-		return descriptions;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public List<String> getDescriptions() {
+    return descriptions;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public List<String> getDisplayNames() {
-		return displayNames;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public List<String> getDisplayNames() {
+    return displayNames;
+  }
 
-	public String getTlibVersion() {
-		return tlibVersion;
-	}
+  public String getTlibVersion() {
+    return tlibVersion;
+  }
 
-	public String getShortName() {
-		return shortName;
-	}
+  public String getShortName() {
+    return shortName;
+  }
 
-	public String getUri() {
-		return uri;
-	}
+  public String getUri() {
+    return uri;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public Map<String, Tag> getTag() {
-		return tag;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public Map<String, Tag> getTag() {
+    return tag;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public List<Tag> getTags() {
-		return tags;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public List<Tag> getTags() {
+    return tags;
+  }
 
-	/**
-	 * Gets the effective dates for the all tags.
-	 *
-	 * @return the effective dates or {@code null} when there are no tags
-	 */
-	public Dates getTagsEffectiveDates() {
-		return tagsEffectiveDates;
-	}
+  /**
+   * Gets the effective dates for the all tags.
+   *
+   * @return the effective dates or {@code null} when there are no tags
+   */
+  public Dates getTagsEffectiveDates() {
+    return tagsEffectiveDates;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public Map<String, Function> getFunction() {
-		return function;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public Map<String, Function> getFunction() {
+    return function;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public List<Function> getFunctions() {
-		return functions;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public List<Function> getFunctions() {
+    return functions;
+  }
 
-	/**
-	 * Gets the effective dates for the all functions.
-	 *
-	 * @return the effective dates or {@code null} when there are no functions
-	 */
-	public Dates getFunctionsEffectiveDates() {
-		return functionsEffectiveDates;
-	}
+  /**
+   * Gets the effective dates for the all functions.
+   *
+   * @return the effective dates or {@code null} when there are no functions
+   */
+  public Dates getFunctionsEffectiveDates() {
+    return functionsEffectiveDates;
+  }
 
-	/**
-	 * Gets the effective dates for the taglib overall, including itself along with all tags and functions.
-	 */
-	public Dates getTaglibEffectiveDates() {
-		return taglibEffectiveDates;
-	}
+  /**
+   * Gets the effective dates for the taglib overall, including itself along with all tags and functions.
+   */
+  public Dates getTaglibEffectiveDates() {
+    return taglibEffectiveDates;
+  }
 }

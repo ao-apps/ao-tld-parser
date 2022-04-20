@@ -38,42 +38,46 @@ import org.xml.sax.InputSource;
  */
 public final class HtmlSnippet {
 
-	/** Make no instances. */
-	private HtmlSnippet() {throw new AssertionError();}
+  /** Make no instances. */
+  private HtmlSnippet() {
+    throw new AssertionError();
+  }
 
-	/**
-	 * Displays all elements with class="<var>summaryClass</var>" of the provided HTML snippet.
-	 * If there is no elements with this class, the entire snippet is displayed.
-	 * <p>
-	 * This parses the HTML snippet into a DOM each invocation.
-	 * For higher performance, use another mechanism to compute once and use repeatedly.
-	 * This is for convenience, not performance.
-	 * </p>
-	 *
-	 * @param summaryClass  The CSS class that marks elements to be included in summaries
-	 */
-	public static String getSummary(String summaryClass, String htmlSnippet) throws XPathExpressionException {
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
-		XPathExpression expression = xpath.compile("/html//*[@class='" + summaryClass + "']");
-		if(expression == null) throw new XPathExpressionException("expression is null");
-		NodeList summaryNodes = (NodeList)expression.evaluate(
-			new InputSource(
-				new StringReader(
-					"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-					+ "<html>" + htmlSnippet + "</html>"
-				)
-			),
-			XPathConstants.NODESET
-		);
-		if(summaryNodes != null && summaryNodes.getLength() > 0) {
-			StringBuilder summary = new StringBuilder();
-			for(int i = 0; i < summaryNodes.getLength(); i++) {
-				summary.append(Coercion.toString(summaryNodes.item(i)));
-			}
-			return summary.toString();
-		} else {
-			return htmlSnippet;
-		}
-	}
+  /**
+   * Displays all elements with class="<var>summaryClass</var>" of the provided HTML snippet.
+   * If there is no elements with this class, the entire snippet is displayed.
+   * <p>
+   * This parses the HTML snippet into a DOM each invocation.
+   * For higher performance, use another mechanism to compute once and use repeatedly.
+   * This is for convenience, not performance.
+   * </p>
+   *
+   * @param summaryClass  The CSS class that marks elements to be included in summaries
+   */
+  public static String getSummary(String summaryClass, String htmlSnippet) throws XPathExpressionException {
+    XPathFactory xpathFactory = XPathFactory.newInstance();
+    XPath xpath = xpathFactory.newXPath();
+    XPathExpression expression = xpath.compile("/html//*[@class='" + summaryClass + "']");
+    if (expression == null) {
+      throw new XPathExpressionException("expression is null");
+    }
+    NodeList summaryNodes = (NodeList)expression.evaluate(
+      new InputSource(
+        new StringReader(
+          "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+          + "<html>" + htmlSnippet + "</html>"
+        )
+      ),
+      XPathConstants.NODESET
+    );
+    if (summaryNodes != null && summaryNodes.getLength() > 0) {
+      StringBuilder summary = new StringBuilder();
+      for (int i = 0; i < summaryNodes.getLength(); i++) {
+        summary.append(Coercion.toString(summaryNodes.item(i)));
+      }
+      return summary.toString();
+    } else {
+      return htmlSnippet;
+    }
+  }
 }

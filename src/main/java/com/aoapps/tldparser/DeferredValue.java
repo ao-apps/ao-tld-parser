@@ -36,24 +36,24 @@ import org.w3c.dom.Element;
  */
 public class DeferredValue {
 
-	private final Attribute attribute;
-	private final String type;
+  private final Attribute attribute;
+  private final String type;
 
-	private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
+  private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
 
-	public DeferredValue(
-		Attribute attribute,
-		Element deferredValueElem
-	) {
-		this.attribute = attribute;
-		this.type = XmlHelper.getChildWithGenerics(deferredValueElem, "type", TYPE_PATTERN, "type");
-	}
+  public DeferredValue(
+    Attribute attribute,
+    Element deferredValueElem
+  ) {
+    this.attribute = attribute;
+    this.type = XmlHelper.getChildWithGenerics(deferredValueElem, "type", TYPE_PATTERN, "type");
+  }
 
-	public Attribute getAttribute() {
-		return attribute;
-	}
+  public Attribute getAttribute() {
+    return attribute;
+  }
 
-	public String getType() {
-		return type;
-	}
+  public String getType() {
+    return type;
+  }
 }

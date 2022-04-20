@@ -45,118 +45,118 @@ import org.xml.sax.SAXException;
  */
 public class Function {
 
-	private final Taglib taglib;
-	private final Dates dates;
-	private final Boolean allowRobots;
-	private final List<String> descriptions;
-	private final List<String> displayNames;
-	private final String name;
-	private final String functionClass;
-	private final String functionSignature;
-	private final String example;
+  private final Taglib taglib;
+  private final Dates dates;
+  private final Boolean allowRobots;
+  private final List<String> descriptions;
+  private final List<String> displayNames;
+  private final String name;
+  private final String functionClass;
+  private final String functionSignature;
+  private final String example;
 
-	private final String descriptionSummary;
+  private final String descriptionSummary;
 
-	private static final Pattern FUNCTION_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "functionSignature" + XmlHelper.PATTERN_POST);
+  private static final Pattern FUNCTION_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "functionSignature" + XmlHelper.PATTERN_POST);
 
-	public Function(
-		String summaryClass,
-		Taglib taglib,
-		Element functionElem
-	) throws XPathExpressionException {
-		this.taglib = taglib;
+  public Function(
+    String summaryClass,
+    Taglib taglib,
+    Element functionElem
+  ) throws XPathExpressionException {
+    this.taglib = taglib;
 
-		this.name = XmlUtils.getChildTextContent(functionElem, "name");
+    this.name = XmlUtils.getChildTextContent(functionElem, "name");
 
-		this.dates = Dates.fromComments(functionElem, taglib.getDates());
-		this.dates.checkNotBefore(taglib.getTldPath() + "/" + name, taglib.getTldPath(), taglib.getDates());
+    this.dates = Dates.fromComments(functionElem, taglib.getDates());
+    this.dates.checkNotBefore(taglib.getTldPath() + "/" + name, taglib.getTldPath(), taglib.getDates());
 
-		this.allowRobots = XmlHelper.parseAllowRobots(functionElem);
+    this.allowRobots = XmlHelper.parseAllowRobots(functionElem);
 
-		List<String> newDescriptions = new ArrayList<>();
-		for(Element descriptionElem : XmlUtils.iterableChildElementsByTagName(functionElem, "description")) {
-			newDescriptions.add(descriptionElem.getTextContent());
-		}
-		this.descriptions = AoCollections.optimalUnmodifiableList(newDescriptions);
+    List<String> newDescriptions = new ArrayList<>();
+    for (Element descriptionElem : XmlUtils.iterableChildElementsByTagName(functionElem, "description")) {
+      newDescriptions.add(descriptionElem.getTextContent());
+    }
+    this.descriptions = AoCollections.optimalUnmodifiableList(newDescriptions);
 
-		List<String> newDisplayNames = new ArrayList<>();
-		for(Element displayNameElem : XmlUtils.iterableChildElementsByTagName(functionElem, "display-name")) {
-			newDisplayNames.add(displayNameElem.getTextContent());
-		}
-		this.displayNames = AoCollections.optimalUnmodifiableList(newDisplayNames);
+    List<String> newDisplayNames = new ArrayList<>();
+    for (Element displayNameElem : XmlUtils.iterableChildElementsByTagName(functionElem, "display-name")) {
+      newDisplayNames.add(displayNameElem.getTextContent());
+    }
+    this.displayNames = AoCollections.optimalUnmodifiableList(newDisplayNames);
 
-		this.functionClass = XmlUtils.getChildTextContent(functionElem, "function-class");
-		this.functionSignature = XmlHelper.getChildWithGenerics(functionElem, "function-signature", FUNCTION_SIGNATURE_PATTERN, "functionSignature");
-		this.example = XmlUtils.getChildTextContent(functionElem, "example");
+    this.functionClass = XmlUtils.getChildTextContent(functionElem, "function-class");
+    this.functionSignature = XmlHelper.getChildWithGenerics(functionElem, "function-signature", FUNCTION_SIGNATURE_PATTERN, "functionSignature");
+    this.example = XmlUtils.getChildTextContent(functionElem, "example");
 
-		try {
-			this.descriptionSummary = descriptions.isEmpty() ? null : HtmlSnippet.getSummary(summaryClass, descriptions.get(0));
-		} catch(XPathExpressionException e) {
-			XPathExpressionException wrapped = new XPathExpressionException(taglib.getTldPath() + "/" + name + "/description: " + e.getMessage());
-			wrapped.initCause(e);
-			throw wrapped;
-		}
-	}
+    try {
+      this.descriptionSummary = descriptions.isEmpty() ? null : HtmlSnippet.getSummary(summaryClass, descriptions.get(0));
+    } catch (XPathExpressionException e) {
+      XPathExpressionException wrapped = new XPathExpressionException(taglib.getTldPath() + "/" + name + "/description: " + e.getMessage());
+      wrapped.initCause(e);
+      throw wrapped;
+    }
+  }
 
-	/**
-	 * @deprecated  {@code apiLinks} is unused, please use {@link #Function(java.lang.String, com.aoapps.tldparser.Taglib, org.w3c.dom.Element)} instead.
-	 */
-	@Deprecated(forRemoval = true)
-	public Function(
-		String summaryClass,
-		Taglib taglib,
-		Element functionElem,
-		Map<String, String> apiLinks
-	) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
-		this(summaryClass, taglib, functionElem);
-	}
+  /**
+   * @deprecated  {@code apiLinks} is unused, please use {@link #Function(java.lang.String, com.aoapps.tldparser.Taglib, org.w3c.dom.Element)} instead.
+   */
+  @Deprecated(forRemoval = true)
+  public Function(
+    String summaryClass,
+    Taglib taglib,
+    Element functionElem,
+    Map<String, String> apiLinks
+  ) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+    this(summaryClass, taglib, functionElem);
+  }
 
-	public Taglib getTaglib() {
-		return taglib;
-	}
+  public Taglib getTaglib() {
+    return taglib;
+  }
 
-	public Dates getDates() {
-		return dates;
-	}
+  public Dates getDates() {
+    return dates;
+  }
 
-	public Boolean getAllowRobots() {
-		return allowRobots;
-	}
+  public Boolean getAllowRobots() {
+    return allowRobots;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public List<String> getDescriptions() {
-		return descriptions;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public List<String> getDescriptions() {
+    return descriptions;
+  }
 
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
-	public List<String> getDisplayNames() {
-		return displayNames;
-	}
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // Returning unmodifiable
+  public List<String> getDisplayNames() {
+    return displayNames;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public String getFunctionClass() {
-		return functionClass;
-	}
+  public String getFunctionClass() {
+    return functionClass;
+  }
 
-	public String getFunctionSignature() {
-		return functionSignature;
-	}
+  public String getFunctionSignature() {
+    return functionSignature;
+  }
 
-	public String getExample() {
-		return example;
-	}
+  public String getExample() {
+    return example;
+  }
 
-	/**
-	 * Gets a summary of the description.
-	 * If there is more than once description, only the first is used in generating the summary.
-	 * If there are no descriptions, returns {@code null}.
-	 *
-	 * @see  HtmlSnippet#getSummary(java.lang.String, java.lang.String)
-	 */
-	public String getDescriptionSummary() {
-		return descriptionSummary;
-	}
+  /**
+   * Gets a summary of the description.
+   * If there is more than once description, only the first is used in generating the summary.
+   * If there are no descriptions, returns {@code null}.
+   *
+   * @see  HtmlSnippet#getSummary(java.lang.String, java.lang.String)
+   */
+  public String getDescriptionSummary() {
+    return descriptionSummary;
+  }
 }
