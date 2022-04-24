@@ -78,10 +78,10 @@ public class Taglib {
    * @param tldDoc  The document that has already been parsed
    */
   public Taglib(
-    String summaryClass,
-    String tldPath,
-    Dates defaultDates,
-    Document tldDoc
+      String summaryClass,
+      String tldPath,
+      Dates defaultDates,
+      Document tldDoc
   ) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
     this.tldPath = tldPath;
 
@@ -135,8 +135,8 @@ public class Taglib {
     this.functions = AoCollections.optimalUnmodifiableList(new ArrayList<>(newFunctions.values()));
     this.functionsEffectiveDates = newFunctionsEffectiveDates;
     this.taglibEffectiveDates = Dates.merge(
-      Dates.merge(this.dates, this.tagsEffectiveDates),
-      this.functionsEffectiveDates
+        Dates.merge(this.dates, this.tagsEffectiveDates),
+        this.functionsEffectiveDates
     );
   }
 
@@ -145,11 +145,11 @@ public class Taglib {
    */
   @Deprecated(forRemoval = true)
   public Taglib(
-    String summaryClass,
-    String tldPath,
-    Dates defaultDates,
-    Document tldDoc,
-    Map<String, String> apiLinks
+      String summaryClass,
+      String tldPath,
+      Dates defaultDates,
+      Document tldDoc,
+      Map<String, String> apiLinks
   ) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
     this(summaryClass, tldPath, defaultDates, tldDoc);
   }

@@ -61,14 +61,14 @@ public final class HtmlSnippet {
     if (expression == null) {
       throw new XPathExpressionException("expression is null");
     }
-    NodeList summaryNodes = (NodeList)expression.evaluate(
-      new InputSource(
-        new StringReader(
-          "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-          + "<html>" + htmlSnippet + "</html>"
-        )
-      ),
-      XPathConstants.NODESET
+    NodeList summaryNodes = (NodeList) expression.evaluate(
+        new InputSource(
+            new StringReader(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                    + "<html>" + htmlSnippet + "</html>"
+            )
+        ),
+        XPathConstants.NODESET
     );
     if (summaryNodes != null && summaryNodes.getLength() > 0) {
       StringBuilder summary = new StringBuilder();

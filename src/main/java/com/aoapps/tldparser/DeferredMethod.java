@@ -42,8 +42,8 @@ public class DeferredMethod {
   private static final Pattern METHOD_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "methodSignature" + XmlHelper.PATTERN_POST);
 
   public DeferredMethod(
-    Attribute attribute,
-    Element deferredMethodElem
+      Attribute attribute,
+      Element deferredMethodElem
   ) {
     this.attribute = attribute;
     this.methodSignature = XmlHelper.getChildWithGenerics(deferredMethodElem, "method-signature", METHOD_SIGNATURE_PATTERN, "methodSignature");

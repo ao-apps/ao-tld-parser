@@ -59,7 +59,7 @@ final class XmlHelper {
     for (int i = 0, len = children.getLength(); i < len; i++) {
       Node child = children.item(i);
       if (child instanceof Comment) {
-        Comment comment = (Comment)child;
+        Comment comment = (Comment) child;
         Matcher matcher = pattern.matcher(comment.getData());
         while (matcher.find()) {
           String doubleQuoted = matcher.group(1);
@@ -100,7 +100,7 @@ final class XmlHelper {
     String comment = getVariable(element, pattern, varName);
     if (text == null) {
       if (comment != null) {
-        throw new IllegalArgumentException("variable-comment (" + varName + ") without child element (" + childTagName +")");
+        throw new IllegalArgumentException("variable-comment (" + varName + ") without child element (" + childTagName + ")");
       }
       return null;
     } else {
@@ -135,7 +135,7 @@ final class XmlHelper {
             commentCh = (commentPos < commentLen) ? comment.charAt(commentPos++) : -1;
           }
           if (textCh != commentCh) {
-            throw new IllegalArgumentException("child element (" + childTagName +") and variable-comment (" + varName + ") mismatch: \"" + text + "\" -> \"" + comment + "\"");
+            throw new IllegalArgumentException("child element (" + childTagName + ") and variable-comment (" + varName + ") mismatch: \"" + text + "\" -> \"" + comment + "\"");
           }
         }
         return comment;
@@ -209,9 +209,9 @@ final class XmlHelper {
 //      }
 //    }
     if (
-      allowRobots == null
-      || (allowRobots = allowRobots.trim()).isEmpty()
-      || "auto".equalsIgnoreCase(allowRobots)
+        allowRobots == null
+            || (allowRobots = allowRobots.trim()).isEmpty()
+            || "auto".equalsIgnoreCase(allowRobots)
     ) {
       return null;
     } else if ("true".equalsIgnoreCase(allowRobots)) {

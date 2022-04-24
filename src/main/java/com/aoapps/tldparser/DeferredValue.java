@@ -42,8 +42,8 @@ public class DeferredValue {
   private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
 
   public DeferredValue(
-    Attribute attribute,
-    Element deferredValueElem
+      Attribute attribute,
+      Element deferredValueElem
   ) {
     this.attribute = attribute;
     this.type = XmlHelper.getChildWithGenerics(deferredValueElem, "type", TYPE_PATTERN, "type");

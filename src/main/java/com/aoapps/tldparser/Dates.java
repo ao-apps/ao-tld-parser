@@ -50,19 +50,19 @@ public class Dates {
   public static final Dates UNKNOWN = new Dates(null, null, null, null);
 
   public static Dates valueOf(
-    DateTime created,
-    DateTime published,
-    DateTime modified,
-    DateTime reviewed
+      DateTime created,
+      DateTime published,
+      DateTime modified,
+      DateTime reviewed
   ) {
     if (created == null && published == null && modified == null && reviewed == null) {
       return UNKNOWN;
     }
     return new Dates(
-      created,
-      published,
-      modified,
-      reviewed
+        created,
+        published,
+        modified,
+        reviewed
     );
   }
 
@@ -79,19 +79,19 @@ public class Dates {
     DateTime reviewed  = parseComments(elem, DATE_REVIEWED_PATTERN,  DATE_REVIEWED);
     // Use defaults when no date-comments found
     if (
-      defaultDates != null
-      && created   == null
-      && published == null
-      && modified  == null
-      && reviewed  == null
+        defaultDates != null
+            && created   == null
+            && published == null
+            && modified  == null
+            && reviewed  == null
     ) {
       return defaultDates;
     }
     return valueOf(
-      created,
-      published,
-      modified,
-      reviewed
+        created,
+        published,
+        modified,
+        reviewed
     );
   }
 
@@ -114,10 +114,10 @@ public class Dates {
   private final DateTime reviewed;
 
   private Dates(
-    DateTime created,
-    DateTime published,
-    DateTime modified,
-    DateTime reviewed
+      DateTime created,
+      DateTime published,
+      DateTime modified,
+      DateTime reviewed
   ) {
     this.created   = created;
     this.published = published;
@@ -237,22 +237,22 @@ public class Dates {
     if (modified1 != null || modified2 != null) {
       if (modified1 == null) {
         modified1 = AoArrays.maxNonNull(
-          created1,
-          published1
+            created1,
+            published1
         );
       }
       if (modified2 == null) {
         modified2 = AoArrays.maxNonNull(
-          created2,
-          published2
+            created2,
+            published2
         );
       }
     }
     return valueOf(
-      older(created1,   created2),
-      older(published1, published2),
-      newer(modified1,  modified2),
-      older(d1.reviewed,  d2.reviewed)
+        older(created1,   created2),
+        older(published1, published2),
+        newer(modified1,  modified2),
+        older(d1.reviewed,  d2.reviewed)
     );
   }
 }

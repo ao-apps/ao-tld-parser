@@ -59,9 +59,9 @@ public class Attribute {
   private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
 
   public Attribute(
-    String summaryClass,
-    Tag tag,
-    Element attributeElem
+      String summaryClass,
+      Tag tag,
+      Element attributeElem
   ) throws XPathExpressionException {
     this.tag = tag;
 

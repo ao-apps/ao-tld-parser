@@ -56,9 +56,9 @@ public class Tag {
   private final String descriptionSummary;
 
   public Tag(
-    String summaryClass,
-    Taglib taglib,
-    Element tagElem
+      String summaryClass,
+      Taglib taglib,
+      Element tagElem
   ) throws XPathExpressionException {
     this.taglib = taglib;
 

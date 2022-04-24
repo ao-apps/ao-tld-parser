@@ -60,9 +60,9 @@ public class Function {
   private static final Pattern FUNCTION_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "functionSignature" + XmlHelper.PATTERN_POST);
 
   public Function(
-    String summaryClass,
-    Taglib taglib,
-    Element functionElem
+      String summaryClass,
+      Taglib taglib,
+      Element functionElem
   ) throws XPathExpressionException {
     this.taglib = taglib;
 
@@ -103,10 +103,10 @@ public class Function {
    */
   @Deprecated(forRemoval = true)
   public Function(
-    String summaryClass,
-    Taglib taglib,
-    Element functionElem,
-    Map<String, String> apiLinks
+      String summaryClass,
+      Taglib taglib,
+      Element functionElem,
+      Map<String, String> apiLinks
   ) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
     this(summaryClass, taglib, functionElem);
   }
