@@ -141,6 +141,13 @@ public class Taglib {
   }
 
   /**
+   * Extracts the components of an XML-parsed *.tld file.
+   *
+   * @param summaryClass  The CSS class that marks elements to be included in summaries
+   * @param tldPath  The path to the taglib, used for error messages only
+   * @param defaultDates  The optional default dates for when no date-comments found
+   * @param tldDoc  The document that has already been parsed
+   *
    * @deprecated  {@code apiLinks} is unused, please use {@link #Taglib(java.lang.String, java.lang.String, com.aoapps.tldparser.Dates, org.w3c.dom.Document)} instead.
    */
   @Deprecated(forRemoval = true)

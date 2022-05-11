@@ -49,6 +49,9 @@ public class Dates {
    */
   public static final Dates UNKNOWN = new Dates(null, null, null, null);
 
+  /**
+   * Gets or creates an instance of {@link Dates}.
+   */
   public static Dates valueOf(
       DateTime created,
       DateTime published,

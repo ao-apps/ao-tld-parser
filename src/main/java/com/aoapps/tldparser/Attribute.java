@@ -58,6 +58,9 @@ public class Attribute {
 
   private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
 
+  /**
+   * Creates a new attribute.
+   */
   public Attribute(
       String summaryClass,
       Tag tag,

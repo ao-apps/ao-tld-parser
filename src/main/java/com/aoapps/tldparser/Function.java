@@ -59,6 +59,9 @@ public class Function {
 
   private static final Pattern FUNCTION_SIGNATURE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "functionSignature" + XmlHelper.PATTERN_POST);
 
+  /**
+   * Creates a new function.
+   */
   public Function(
       String summaryClass,
       Taglib taglib,
@@ -99,6 +102,8 @@ public class Function {
   }
 
   /**
+   * Creates a new function.
+   *
    * @deprecated  {@code apiLinks} is unused, please use {@link #Function(java.lang.String, com.aoapps.tldparser.Taglib, org.w3c.dom.Element)} instead.
    */
   @Deprecated(forRemoval = true)

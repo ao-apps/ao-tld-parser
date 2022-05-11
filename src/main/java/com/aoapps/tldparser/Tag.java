@@ -55,6 +55,9 @@ public class Tag {
 
   private final String descriptionSummary;
 
+  /**
+   * Creates a new tag.
+   */
   public Tag(
       String summaryClass,
       Taglib taglib,
