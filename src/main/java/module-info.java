@@ -29,4 +29,4 @@ module com.aoapps.tldparser {
   requires org.joda.time; // <groupId>joda-time</groupId><artifactId>joda-time</artifactId>
   // Java SE
   requires java.xml;
-} // TODO: Avoiding rewrite-maven-plugin-4.22.2 truncation
+}
