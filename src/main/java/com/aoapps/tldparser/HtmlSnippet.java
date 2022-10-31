@@ -55,6 +55,7 @@ public final class HtmlSnippet {
    * @param summaryClass  The CSS class that marks elements to be included in summaries
    */
   public static String getSummary(String summaryClass, String htmlSnippet) throws XPathExpressionException {
+    // Java 19: New XML Processing Limits (JDK-8270504 (not public)), see https://www.oracle.com/java/technologies/javase/19all-relnotes.html
     XPathFactory xpathFactory = XPathFactory.newInstance();
     XPath xpath = xpathFactory.newXPath();
     XPathExpression expression = xpath.compile("/html//*[@class='" + summaryClass + "']");
