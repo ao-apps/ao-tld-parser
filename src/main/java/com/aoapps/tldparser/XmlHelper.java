@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -135,7 +135,7 @@ final class XmlHelper {
             commentCh = (commentPos < commentLen) ? comment.charAt(commentPos++) : -1;
           }
           if (textCh != commentCh) {
-            throw new IllegalArgumentException("child element (" + childTagName + ") and variable-comment (" + varName + ") mismatch: \"" + text + "\" -> \"" + comment + "\"");
+            throw new IllegalArgumentException("child element (" + childTagName + ") and variable-comment (" + varName + ") mismatch: \"" + text + "\" → \"" + comment + "\"");
           }
         }
         return comment;
