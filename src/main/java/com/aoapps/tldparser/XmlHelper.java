@@ -219,7 +219,10 @@ final class XmlHelper {
     } else if ("false".equalsIgnoreCase(allowRobots)) {
       return Boolean.FALSE;
     } else {
+      // Matches ao-tld-parser:XmlHelper.java
+      // Matches semanticcms-changelog-taglib:ReleaseTag.java
       // Matches semanticcms-core-taglib:PageTag.java
+      // Matches semanticcms-news-taglib:NewsTag.java
       throw new IllegalArgumentException("Unexpected value for allowRobots, expect one of \"auto\", \"true\", or \"false\": " + allowRobots);
     }
   }
