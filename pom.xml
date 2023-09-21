@@ -38,7 +38,7 @@ along with ao-tld-parser.  If not, see <https://www.gnu.org/licenses/>.
     <module.name>com.aoapps.tldparser</module.name>
     <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://oss.aoapps.com/">AO OSS</a>
 / <a target="${javadoc.target}" href="${project.url}">TLD Parser</a>]]></javadoc.breadcrumbs>
-    
+
     <description.html><![CDATA[Parses <a target="${javadoc.target}" rel="nofollow" href="https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.html">JSP tag library</a> *.tld files.]]></description.html>
     <!-- Dependencies -->
     <commons-lang3.version>3.13.0</commons-lang3.version>
