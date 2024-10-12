@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -41,6 +41,9 @@ public class DeferredValue {
 
   private static final Pattern TYPE_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + "type" + XmlHelper.PATTERN_POST);
 
+  /**
+   * Creates a new {@link DeferredValue}.
+   */
   public DeferredValue(
       Attribute attribute,
       Element deferredValueElem
