@@ -28,10 +28,10 @@ import org.w3c.dom.Element;
 
 /**
  * Models <a href="https://docs.oracle.com/cd/E19575-01/819-3669/bnahr/index.html">deferred values</a>.
- * <p>
- * TLD files may provide generics within special comments inside the XML, where the value must match
- * <code>type</code>, but with the addition of {@code <…>} segments.
- * </p>
+ *
+ * <p>TLD files may provide generics within special comments inside the XML, where the value must match
+ * <code>type</code>, but with the addition of {@code <…>} segments.</p>
+ *
  * <pre>&lt;!-- type = "…" --&gt;</pre>
  */
 public class DeferredValue {

@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -87,10 +87,10 @@ final class XmlHelper {
   /**
    * Gets a value from a child node, with optional variable-comment providing
    * a more detailed version with generics.
-   * <p>
-   * The generics are provided within special comments inside the XML, where the value must match
-   * <code><var>childTagName</var></code>, but with the addition of {@code <…>} segments.
-   * </p>
+   *
+   * <p>The generics are provided within special comments inside the XML, where the value must match
+   * <code><var>childTagName</var></code>, but with the addition of {@code <…>} segments.</p>
+   *
    * <pre>&lt;!-- <var>varName</var> = "…" --&gt;</pre>
    *
    * @see  XmlUtils#getChildTextContent(org.w3c.dom.Element, java.lang.String)

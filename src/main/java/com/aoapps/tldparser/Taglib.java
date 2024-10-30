@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -38,18 +38,14 @@ import org.xml.sax.SAXException;
 
 /**
  * Models the *.tld file overall.
- * <p>
- * TODO: Warn when using defaultDates?
- * </p>
- * <p>
- * TODO: When a taglib is expected to have all dates specified, disallow default dates and error instead?
- * </p>
- * <p>
- * TODO: Use a Callable to get defaultDates when first needed.  This will avoid overhead when not needed.
- * </p>
- * <p>
- * TODO: Parse all elements and error if dates found in wrong places?
- * </p>
+ *
+ * <p>TODO: Warn when using defaultDates?</p>
+ *
+ * <p>TODO: When a taglib is expected to have all dates specified, disallow default dates and error instead?</p>
+ *
+ * <p>TODO: Use a Callable to get defaultDates when first needed.  This will avoid overhead when not needed.</p>
+ *
+ * <p>TODO: Parse all elements and error if dates found in wrong places?</p>
  */
 public class Taglib {
 

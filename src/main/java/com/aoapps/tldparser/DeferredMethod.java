@@ -28,10 +28,10 @@ import org.w3c.dom.Element;
 
 /**
  * Models <a href="https://docs.oracle.com/cd/E19575-01/819-3669/bnahr/index.html">deferred methods</a>.
- * <p>
- * TLD files may provide generics within special comments inside the XML, where the value must match
- * <code>method-signature</code>, but with the addition of {@code <…>} segments.
- * </p>
+ *
+ * <p>TLD files may provide generics within special comments inside the XML, where the value must match
+ * <code>method-signature</code>, but with the addition of {@code <…>} segments.</p>
+ *
  * <pre>&lt;!-- methodSignature = "…" --&gt;</pre>
  */
 public class DeferredMethod {

@@ -212,14 +212,12 @@ public class Dates {
 
   /**
    * Merges one date with another date, taking the older created, older published, newer modified, and older reviewed.
-   * <p>
-   * If both dates are {@code null}, {@code null} is returned.
-   * If only one dates is {@code null}, the non-{@code null} is returned.
-   * </p>
-   * <p>
-   * If the individual field of either is {@code null}, the field result is {@code null}.
-   * This results in an unknown date being propagates as {@code null}.
-   * </p>
+   *
+   * <p>If both dates are {@code null}, {@code null} is returned.
+   * If only one dates is {@code null}, the non-{@code null} is returned.</p>
+   *
+   * <p>If the individual field of either is {@code null}, the field result is {@code null}.
+   * This results in an unknown date being propagates as {@code null}.</p>
    */
   static Dates merge(Dates d1, Dates d2) {
     if (d1 == null && d2 == null) {

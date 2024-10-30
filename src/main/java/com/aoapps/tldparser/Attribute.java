@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -33,13 +33,12 @@ import org.w3c.dom.Element;
 
 /**
  * Models one attribute within a tag within the *.tld file.
- * <p>
- * See <a href="https://docs.oracle.com/cd/E19879-01/819-3669/bnani/index.html">Declaring Tag Attributes for Tag Handlers (The Java EE 5 Tutorial)</a>.
- * </p>
- * <p>
- * TLD files may provide generics within special comments inside the XML, where the value must match
- * <code>type</code>, but with the addition of {@code <…>} segments.
- * </p>
+ *
+ * <p>See <a href="https://docs.oracle.com/cd/E19879-01/819-3669/bnani/index.html">Declaring Tag Attributes for Tag Handlers (The Java EE 5 Tutorial)</a>.</p>
+ *
+ * <p>TLD files may provide generics within special comments inside the XML, where the value must match
+ * <code>type</code>, but with the addition of {@code <…>} segments.</p>
+ *
  * <pre>&lt;!-- type = "…" --&gt;</pre>
  */
 public class Attribute {
