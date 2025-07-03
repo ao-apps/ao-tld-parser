@@ -22,7 +22,7 @@ Parses [JSP tag library](https://docs.oracle.com/javaee/5/tutorial/doc/bnaiy.htm
 * [Project Home](https://oss.aoapps.com/tld-parser/)
 * [Changelog](https://oss.aoapps.com/tld-parser/changelog)
 * [API Docs](https://oss.aoapps.com/tld-parser/apidocs/)
-* [Maven Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-tld-parser)
+* [Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-tld-parser)
 * [GitHub](https://github.com/ao-apps/ao-tld-parser)
 
 ## Related Projects
