@@ -19,3 +19,6 @@ e361116e96ccb6f7f3e6ef81a7dd0bc6aedfe742
 
 # Performed manual checkstyle clean-up
 64c89beb3a2a3f24fb5a326f37b964b3a611171a
+
+# Removed unnecessary whitespace
+063203563c1948c0f5dd2fb659969b0a410ea124
