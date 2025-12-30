@@ -37,7 +37,6 @@ def upstreamProjects = [
   'collections', // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
   'lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   // No Jenkins: <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
-  // No Jenkins: <groupId>joda-time</groupId><artifactId>joda-time</artifactId>
 
   // Test Direct
   // No Jenkins: <groupId>junit</groupId><artifactId>junit</artifactId>

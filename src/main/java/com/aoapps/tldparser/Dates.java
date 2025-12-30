@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,8 +24,8 @@
 package com.aoapps.tldparser;
 
 import com.aoapps.collections.AoArrays;
+import java.time.ZonedDateTime;
 import java.util.regex.Pattern;
-import org.joda.time.DateTime;
 import org.w3c.dom.Element;
 
 /**
@@ -53,10 +53,10 @@ public class Dates {
    * Gets or creates an instance of {@link Dates}.
    */
   public static Dates valueOf(
-      DateTime created,
-      DateTime published,
-      DateTime modified,
-      DateTime reviewed
+      ZonedDateTime created,
+      ZonedDateTime published,
+      ZonedDateTime modified,
+      ZonedDateTime reviewed
   ) {
     if (created == null && published == null && modified == null && reviewed == null) {
       return UNKNOWN;
@@ -76,10 +76,10 @@ public class Dates {
    * @param defaultDates  The optional default dates for when no date-comments found
    */
   public static Dates fromComments(Element elem, Dates defaultDates) {
-    DateTime created   = parseComments(elem, DATE_CREATED_PATTERN,   DATE_CREATED);
-    DateTime published = parseComments(elem, DATE_PUBLISHED_PATTERN, DATE_PUBLISHED);
-    DateTime modified  = parseComments(elem, DATE_MODIFIED_PATTERN,  DATE_MODIFIED);
-    DateTime reviewed  = parseComments(elem, DATE_REVIEWED_PATTERN,  DATE_REVIEWED);
+    ZonedDateTime created   = parseComments(elem, DATE_CREATED_PATTERN,   DATE_CREATED);
+    ZonedDateTime published = parseComments(elem, DATE_PUBLISHED_PATTERN, DATE_PUBLISHED);
+    ZonedDateTime modified  = parseComments(elem, DATE_MODIFIED_PATTERN,  DATE_MODIFIED);
+    ZonedDateTime reviewed  = parseComments(elem, DATE_REVIEWED_PATTERN,  DATE_REVIEWED);
     // Use defaults when no date-comments found
     if (
         defaultDates != null
@@ -106,21 +106,21 @@ public class Dates {
   /**
    * Parse dates from special comments directly within a given {@link Element}.
    */
-  private static DateTime parseComments(Element elem, Pattern pattern, String varName) {
+  private static ZonedDateTime parseComments(Element elem, Pattern pattern, String varName) {
     String value = XmlHelper.getVariable(elem, pattern, varName);
-    return (value == null) ? null : new DateTime(value);
+    return (value == null) ? null : ZonedDateTime.parse(value);
   }
 
-  private final DateTime created;
-  private final DateTime published;
-  private final DateTime modified;
-  private final DateTime reviewed;
+  private final ZonedDateTime created;
+  private final ZonedDateTime published;
+  private final ZonedDateTime modified;
+  private final ZonedDateTime reviewed;
 
   private Dates(
-      DateTime created,
-      DateTime published,
-      DateTime modified,
-      DateTime reviewed
+      ZonedDateTime created,
+      ZonedDateTime published,
+      ZonedDateTime modified,
+      ZonedDateTime reviewed
   ) {
     this.created   = created;
     this.published = published;
@@ -135,7 +135,7 @@ public class Dates {
    *                            published because it seems to have more use overall than created.
    */
   // Matches com.semanticcms.core.model.Page.getDateCreated()
-  public DateTime getCreated() {
+  public ZonedDateTime getCreated() {
     return created;
   }
 
@@ -146,7 +146,7 @@ public class Dates {
    *                          published because it seems to have more use overall than created.
    */
   // Matches com.semanticcms.core.model.Page.getDatePublished()
-  public DateTime getPublished() {
+  public ZonedDateTime getPublished() {
     return published;
   }
 
@@ -154,7 +154,7 @@ public class Dates {
    * <a href="https://schema.org/dateModified">https://schema.org/dateModified</a>.
    */
   // Matches com.semanticcms.core.model.Page.getDateModified()
-  public DateTime getModified() {
+  public ZonedDateTime getModified() {
     return modified;
   }
 
@@ -164,7 +164,7 @@ public class Dates {
    * has not been modified.
    */
   // Matches com.semanticcms.core.model.Page.getDateReviewed()
-  public DateTime getReviewed() {
+  public ZonedDateTime getReviewed() {
     return reviewed;
   }
 
@@ -173,7 +173,7 @@ public class Dates {
    *
    * @throws IllegalArgumentException when the date is before the other date
    */
-  private static void checkNotBefore(String field1, DateTime dt1, String field2, DateTime dt2) throws IllegalArgumentException {
+  private static void checkNotBefore(String field1, ZonedDateTime dt1, String field2, ZonedDateTime dt2) throws IllegalArgumentException {
     if (dt1 != null && dt2 != null && dt1.compareTo(dt2) < 0) {
       throw new IllegalArgumentException(field1 + " < " + field2 + ": " + dt1 + " < " + dt2);
     }
@@ -193,7 +193,7 @@ public class Dates {
   /**
    * Gets the older of two dates or {@code null} when either date is {@code null}.
    */
-  private static DateTime older(DateTime dt1, DateTime dt2) {
+  private static ZonedDateTime older(ZonedDateTime dt1, ZonedDateTime dt2) {
     if (dt1 == null || dt2 == null) {
       return null;
     }
@@ -203,7 +203,7 @@ public class Dates {
   /**
    * Gets the newer of two dates or {@code null} when either date is {@code null}.
    */
-  private static DateTime newer(DateTime dt1, DateTime dt2) {
+  private static ZonedDateTime newer(ZonedDateTime dt1, ZonedDateTime dt2) {
     if (dt1 == null || dt2 == null) {
       return null;
     }
@@ -229,12 +229,12 @@ public class Dates {
     if (d2 == null) {
       return d1;
     }
-    DateTime created1   = d1.getCreated();
-    DateTime created2   = d2.getCreated();
-    DateTime published1 = d1.getPublished();
-    DateTime published2 = d2.getPublished();
-    DateTime modified1  = d1.getModified();
-    DateTime modified2  = d2.getModified();
+    ZonedDateTime created1   = d1.getCreated();
+    ZonedDateTime created2   = d2.getCreated();
+    ZonedDateTime published1 = d1.getPublished();
+    ZonedDateTime published2 = d2.getPublished();
+    ZonedDateTime modified1  = d1.getModified();
+    ZonedDateTime modified2  = d2.getModified();
     if (modified1 != null || modified2 != null) {
       if (modified1 == null) {
         modified1 = AoArrays.maxNonNull(
