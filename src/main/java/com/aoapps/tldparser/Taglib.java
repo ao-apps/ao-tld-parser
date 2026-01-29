@@ -144,7 +144,7 @@ public class Taglib {
    * @param defaultDates  The optional default dates for when no date-comments found
    * @param tldDoc  The document that has already been parsed
    *
-   * @deprecated  {@code apiLinks} is unused, please use {@link #Taglib(java.lang.String, java.lang.String, com.aoapps.tldparser.Dates, org.w3c.dom.Document)} instead.
+   * @deprecated  {@code apiLinks} is unused, please use {@link Taglib#Taglib(java.lang.String, java.lang.String, com.aoapps.tldparser.Dates, org.w3c.dom.Document)} instead.
    */
   @Deprecated(forRemoval = true)
   public Taglib(

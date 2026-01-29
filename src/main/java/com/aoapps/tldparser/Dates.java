@@ -31,10 +31,10 @@ import org.w3c.dom.Element;
 /**
  * TLD files may provide dates within special comments inside the XML.
  * <ol>
- * <li><code>&lt;!-- dateCreated = "<var><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></var>" --&gt;</code>: {@link #getCreated()}</li>
- * <li><code>&lt;!-- datePublished = "<var><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></var>" --&gt;</code>: {@link #getPublished()}</li>
- * <li><code>&lt;!-- dateModified = "<var><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></var>" --&gt;</code>: {@link #getModified()}</li>
- * <li><code>&lt;!-- dateReviewed = "<var><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></var>" --&gt;</code>: {@link #getReviewed()}</li>
+ * <li><code>&lt;!-- dateCreated = "<var><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></var>" --&gt;</code>: {@link Dates#getCreated()}</li>
+ * <li><code>&lt;!-- datePublished = "<var><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></var>" --&gt;</code>: {@link Dates#getPublished()}</li>
+ * <li><code>&lt;!-- dateModified = "<var><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></var>" --&gt;</code>: {@link Dates#getModified()}</li>
+ * <li><code>&lt;!-- dateReviewed = "<var><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></var>" --&gt;</code>: {@link Dates#getReviewed()}</li>
  * </ol>
  */
 public class Dates {
@@ -131,7 +131,7 @@ public class Dates {
   /**
    * <a href="https://schema.org/dateCreated">https://schema.org/dateCreated</a>.
    *
-   * @see  #getPublished()  When created and published are the same date, prefer
+   * @see  Dates#getPublished()  When created and published are the same date, prefer
    *                            published because it seems to have more use overall than created.
    */
   // Matches com.semanticcms.core.model.Page.getDateCreated()
@@ -142,7 +142,7 @@ public class Dates {
   /**
    * <a href="https://schema.org/datePublished">https://schema.org/datePublished</a>.
    *
-   * @see  #getCreated()  When created and published are the same date, prefer
+   * @see  Dates#getCreated()  When created and published are the same date, prefer
    *                          published because it seems to have more use overall than created.
    */
   // Matches com.semanticcms.core.model.Page.getDatePublished()
@@ -181,7 +181,7 @@ public class Dates {
 
   /**
    * Checks that this set of dates is not before the given set of dates.
-   * Compares both {@link #getCreated()} and {@link #getPublished()}.
+   * Compares both {@link Dates#getCreated()} and {@link Dates#getPublished()}.
    *
    * @throws IllegalArgumentException when any field of this is before the same field of the given set of dates.
    */

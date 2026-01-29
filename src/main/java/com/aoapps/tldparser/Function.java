@@ -104,7 +104,7 @@ public class Function {
   /**
    * Creates a new function.
    *
-   * @deprecated  {@code apiLinks} is unused, please use {@link #Function(java.lang.String, com.aoapps.tldparser.Taglib, org.w3c.dom.Element)} instead.
+   * @deprecated  {@code apiLinks} is unused, please use {@link Function#Function(java.lang.String, com.aoapps.tldparser.Taglib, org.w3c.dom.Element)} instead.
    */
   @Deprecated(forRemoval = true)
   public Function(
