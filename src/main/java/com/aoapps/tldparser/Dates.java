@@ -1,6 +1,6 @@
 /*
  * ao-tld-parser - Parses JSP tag library *.tld files.
- * Copyright (C) 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
+ * Copyright (C) 2019, 2020, 2021, 2022, 2024, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -39,10 +39,10 @@ import org.w3c.dom.Element;
  */
 public class Dates {
 
-  private static final String DATE_CREATED   = "dateCreated";
+  private static final String DATE_CREATED = "dateCreated";
   private static final String DATE_PUBLISHED = "datePublished";
-  private static final String DATE_MODIFIED  = "dateModified";
-  private static final String DATE_REVIEWED  = "dateReviewed";
+  private static final String DATE_MODIFIED = "dateModified";
+  private static final String DATE_REVIEWED = "dateReviewed";
 
   /**
    * A constant for a set of unknown dates.
@@ -76,17 +76,17 @@ public class Dates {
    * @param defaultDates  The optional default dates for when no date-comments found
    */
   public static Dates fromComments(Element elem, Dates defaultDates) {
-    ZonedDateTime created   = parseComments(elem, DATE_CREATED_PATTERN,   DATE_CREATED);
+    ZonedDateTime created = parseComments(elem, DATE_CREATED_PATTERN, DATE_CREATED);
     ZonedDateTime published = parseComments(elem, DATE_PUBLISHED_PATTERN, DATE_PUBLISHED);
-    ZonedDateTime modified  = parseComments(elem, DATE_MODIFIED_PATTERN,  DATE_MODIFIED);
-    ZonedDateTime reviewed  = parseComments(elem, DATE_REVIEWED_PATTERN,  DATE_REVIEWED);
+    ZonedDateTime modified = parseComments(elem, DATE_MODIFIED_PATTERN, DATE_MODIFIED);
+    ZonedDateTime reviewed = parseComments(elem, DATE_REVIEWED_PATTERN, DATE_REVIEWED);
     // Use defaults when no date-comments found
     if (
         defaultDates != null
-            && created   == null
+            && created == null
             && published == null
-            && modified  == null
-            && reviewed  == null
+            && modified == null
+            && reviewed == null
     ) {
       return defaultDates;
     }
@@ -98,10 +98,10 @@ public class Dates {
     );
   }
 
-  static final Pattern DATE_CREATED_PATTERN   = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_CREATED   + XmlHelper.PATTERN_POST);
+  static final Pattern DATE_CREATED_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_CREATED + XmlHelper.PATTERN_POST);
   static final Pattern DATE_PUBLISHED_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_PUBLISHED + XmlHelper.PATTERN_POST);
-  static final Pattern DATE_MODIFIED_PATTERN  = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_MODIFIED  + XmlHelper.PATTERN_POST);
-  static final Pattern DATE_REVIEWED_PATTERN  = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_REVIEWED  + XmlHelper.PATTERN_POST);
+  static final Pattern DATE_MODIFIED_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_MODIFIED + XmlHelper.PATTERN_POST);
+  static final Pattern DATE_REVIEWED_PATTERN = Pattern.compile(XmlHelper.PATTERN_PRE + DATE_REVIEWED + XmlHelper.PATTERN_POST);
 
   /**
    * Parse dates from special comments directly within a given {@link Element}.
@@ -122,10 +122,10 @@ public class Dates {
       ZonedDateTime modified,
       ZonedDateTime reviewed
   ) {
-    this.created   = created;
+    this.created = created;
     this.published = published;
-    this.modified  = modified;
-    this.reviewed  = reviewed;
+    this.modified = modified;
+    this.reviewed = reviewed;
   }
 
   /**
@@ -186,7 +186,7 @@ public class Dates {
    * @throws IllegalArgumentException when any field of this is before the same field of the given set of dates.
    */
   void checkNotBefore(String fields, String otherFields, Dates other) throws IllegalArgumentException {
-    checkNotBefore(fields + '/' + DATE_CREATED,   getCreated(),   otherFields + '/' + DATE_CREATED,   other.getCreated());
+    checkNotBefore(fields + '/' + DATE_CREATED, getCreated(), otherFields + '/' + DATE_CREATED, other.getCreated());
     checkNotBefore(fields + '/' + DATE_PUBLISHED, getPublished(), otherFields + '/' + DATE_PUBLISHED, other.getPublished());
   }
 
@@ -229,12 +229,12 @@ public class Dates {
     if (d2 == null) {
       return d1;
     }
-    ZonedDateTime created1   = d1.getCreated();
-    ZonedDateTime created2   = d2.getCreated();
+    ZonedDateTime created1 = d1.getCreated();
+    ZonedDateTime created2 = d2.getCreated();
     ZonedDateTime published1 = d1.getPublished();
     ZonedDateTime published2 = d2.getPublished();
-    ZonedDateTime modified1  = d1.getModified();
-    ZonedDateTime modified2  = d2.getModified();
+    ZonedDateTime modified1 = d1.getModified();
+    ZonedDateTime modified2 = d2.getModified();
     if (modified1 != null || modified2 != null) {
       if (modified1 == null) {
         modified1 = AoArrays.maxNonNull(
@@ -250,10 +250,10 @@ public class Dates {
       }
     }
     return valueOf(
-        older(created1,   created2),
+        older(created1, created2),
         older(published1, published2),
-        newer(modified1,  modified2),
-        older(d1.reviewed,  d2.reviewed)
+        newer(modified1, modified2),
+        older(d1.reviewed, d2.reviewed)
     );
   }
 }
